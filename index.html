@@ -10,29 +10,30 @@
     :root{
       --bg:#000; --ink:#f5f5f5; --muted:#c9c9c9; --card:#121212;
       --max:980px; --radius:14px;
-      --stripH: clamp(80px, 15dvh, 132px); /* grande, pero flexible a barras iOS */
+      --stripH: clamp(80px, 15dvh, 132px);
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth; overflow-x:hidden}
+    html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
     body{
       margin:0; background:var(--bg); color:var(--ink);
       font-family:Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
       overflow-x:hidden;
     }
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px; overflow-x:hidden}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px; overflow:visible}
 
-    /* HERO: layout fijo con HINT ABSOLUTO pegado abajo */
+    /* HERO */
     header#hero{
-      height:100dvh; /* dinámico: ocupa la ventana real (iOS barras incluidas) */
-      position:relative;
-      display:block;
-      padding-top:calc(6px + env(safe-area-inset-top)/3);
+      height:100dvh;
+      display:grid;
+      grid-template-rows:auto 1fr auto; /* socials / content / hint */
+      padding-top:calc(8px + env(safe-area-inset-top)/3);
+      padding-bottom:calc(10px + env(safe-area-inset-bottom)/3);
     }
-    /* Iconos arriba, centrados */
+
+    /* Fila 1: iconos */
     .social-hero{
       display:flex; align-items:center; justify-content:center; gap:12px;
-      margin-bottom:6px;
     }
     .social-hero a{
       display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
@@ -40,35 +41,55 @@
     }
     .social-hero svg{ width:18px; height:18px; fill:#fff }
 
-    /* Bloque central ANCLADO arriba, sin huecos extra */
-    .hero-mid{ width:100%; }
-    .stack{ display:grid; text-align:center; gap:6px; margin:0 auto; place-items:center; }
-    h1{ margin:0; font-weight:700; color:#fff; letter-spacing:.2px;
-        font-size:clamp(30px, 7.2vw, 46px); line-height:1.04; }
+    /* Fila 2: contenido centrado */
+    .hero-mid{ display:flex; align-items:center; justify-content:center; }
+    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; }
+    h1{
+      margin:0; font-weight:700; color:#fff; letter-spacing:.2px;
+      font-size:clamp(30px, 7.2vw, 46px); line-height:1.06;
+    }
     .subtitle{font-weight:700; color:#fff; font-size:clamp(18px,4.6vw,24px); margin:0}
-    .lead{ color:var(--ink); font-size:clamp(14px,3.9vw,18px); margin:0; max-width:760px; font-weight:600; line-height:1.38 }
-    .lead.light{ font-weight:400; line-height:1.34 }
+    .lead{ color:var(--ink); font-size:clamp(14px,3.9vw,18px); margin:0; max-width:760px; font-weight:600; line-height:1.42 }
+    .lead.light{ font-weight:400; line-height:1.36 }
 
-    /* Fototira en hero */
-    .hscroll{ display:flex; gap:8px; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; max-width:100%; padding:0; }
-    .hscroll::-webkit-scrollbar{ height:6px }
-    .hscroll::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
+    /* Fototiras (hero y secciones) — garantizar scroll lateral en móvil */
+    .hscroll,
+    .hstrip{
+      display:flex;
+      gap:8px;
+      overflow-x:auto !important;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+      max-width:100%;
+      padding:0;
+      overscroll-behavior-x:contain;
+      touch-action:pan-x; /* gestos horizontales */
+      cursor:grab;
+      scrollbar-width:thin;
+    }
+    .hstrip{ gap:12px; padding-bottom:6px }
+    .hscroll::-webkit-scrollbar,
+    .hstrip::-webkit-scrollbar{ height:6px }
+    .hscroll::-webkit-scrollbar-thumb,
+    .hstrip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
+
     .hero-strip{ height:var(--stripH); align-items:center; justify-content:center; }
     .hero-strip .hitem{ flex:0 0 auto; height:100%; scroll-snap-align:start }
     .hero-strip .hitem img{ height:100%; width:auto; aspect-ratio:4/3; object-fit:cover; border-radius:10px; display:block }
 
-    /* Zonas pegadas al texto */
+    .hstrip .hitem{ flex:0 0 auto; width:clamp(120px, 26vw, 180px); scroll-snap-align:start }
+    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
+    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:14px; margin-top:6px }
+
+    /* Zonas */
     .zones{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:0 }
     .zone{ background:#1b1b1b; color:#eaeaea; padding:4px 9px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap }
 
-    /* Scroll hint ABSOLUTO: nunca se oculta bajo barras */
-    .scrollhint{
-      position:absolute; left:50%; transform:translateX(-50%);
-      bottom:calc(10px + env(safe-area-inset-bottom) + 8px);
-      color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px; pointer-events:none;
-    }
+    /* Fila 3: hint abajo centrado */
+    .scrollhint{ text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px }
 
-    /* Secciones inferiores (igual) */
+    /* Secciones inferiores */
     section{ padding:28px 0 }
     .card{ background:var(--card); border-radius:var(--radius); padding:20px }
     h2.title{ margin:0 0 8px; font-size:clamp(20px,3.2vw,26px); color:#fff; font-weight:700 }
@@ -76,10 +97,6 @@
     .two-col{ display:grid; gap:16px; grid-template-columns:1.1fr .9fr }
     .two-col > div{ min-width:0 }
     @media (max-width:860px){ .two-col{ grid-template-columns:1fr } }
-    .hstrip{ display:flex; gap:12px; overflow-x:auto; overflow-y:hidden; padding-bottom:6px; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; max-width:100%; }
-    .hstrip .hitem{ flex:0 0 auto; width:clamp(120px, 26vw, 180px); scroll-snap-align:start }
-    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
-    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:14px; margin-top:6px }
 
     .video{ position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden }
     .video iframe, .video video{ width:100%; height:100%; border:0; display:block }
@@ -94,11 +111,12 @@
 <body>
 
   <header id="hero">
+    <!-- Iconos arriba -->
     <div class="social-hero" aria-label="Schnellzugriff Socials">
-      <a href="https://instagram.com/DEIN_INSTAGRAM" target="_blank" rel="noopener" aria-label="Instagram">
+      <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
       </a>
-      <a href="https://www.tiktok.com/@DEIN_TIKTOK" target="_blank" rel="noopener" aria-label="TikTok">
+      <a href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener" aria-label="TikTok">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
       </a>
       <a href="mailto:dein_email@email.com" aria-label="E‑Mail">
@@ -106,6 +124,7 @@
       </a>
     </div>
 
+    <!-- Contenido centrado -->
     <div class="hero-mid">
       <div class="stack wrap">
         <h1>Hector</h1>
@@ -132,6 +151,7 @@
       </div>
     </div>
 
+    <!-- Hint abajo -->
     <div class="scrollhint">Nach unten scrollen ↓</div>
   </header>
 
@@ -280,5 +300,24 @@
   </main>
 
   <footer class="wrap">© Hector · Mit Herz in München erstellt</footer>
+
+  <script>
+    // Fallback: drag-to-scroll con ratón/touch para .hscroll y .hstrip
+    for (const el of document.querySelectorAll('.hscroll, .hstrip')){
+      let isDown=false, startX=0, scrollLeft=0;
+      el.addEventListener('pointerdown', (e)=>{
+        isDown=true; el.setPointerCapture(e.pointerId);
+        el.style.cursor='grabbing'; startX=e.clientX; scrollLeft=el.scrollLeft;
+      });
+      el.addEventListener('pointermove', (e)=>{
+        if(!isDown) return;
+        const dx=e.clientX - startX;
+        el.scrollLeft = scrollLeft - dx;
+      });
+      ['pointerup','pointerleave','pointercancel'].forEach(type=>{
+        el.addEventListener(type, ()=>{ isDown=false; el.style.cursor='grab'; });
+      });
+    }
+  </script>
 </body>
 </html>
