@@ -18,9 +18,10 @@
       margin:0; background:var(--bg); color:var(--ink);
       font-family:Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-      overflow-x:hidden;
+      overflow-x:hidden; /* Bloquea desplazamiento lateral global */
+      touch-action: pan-y;
     }
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px; overflow:visible}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
 
     /* HERO */
     header#hero{
@@ -29,9 +30,11 @@
       grid-template-rows:auto 1fr auto; /* socials / content / hint */
       padding-top:calc(8px + env(safe-area-inset-top)/3);
       padding-bottom:calc(10px + env(safe-area-inset-bottom)/3);
+      touch-action: pan-y;  /* hero solo vertical */
+      overflow-x:hidden;    /* evita que el hero se mueva lateral */
     }
 
-    /* Fila 1: iconos */
+    /* Iconos arriba */
     .social-hero{
       display:flex; align-items:center; justify-content:center; gap:12px;
     }
@@ -41,9 +44,9 @@
     }
     .social-hero svg{ width:18px; height:18px; fill:#fff }
 
-    /* Fila 2: contenido centrado */
-    .hero-mid{ display:flex; align-items:center; justify-content:center; }
-    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; }
+    /* Contenido centrado (sin pan-x) */
+    .hero-mid{ display:flex; align-items:center; justify-content:center; width:100%; touch-action: pan-y; overflow-x:clip; }
+    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; width:100%; touch-action: pan-y; overflow-x:clip; }
     h1{
       margin:0; font-weight:700; color:#fff; letter-spacing:.2px;
       font-size:clamp(30px, 7.2vw, 46px); line-height:1.06;
@@ -52,44 +55,33 @@
     .lead{ color:var(--ink); font-size:clamp(14px,3.9vw,18px); margin:0; max-width:760px; font-weight:600; line-height:1.42 }
     .lead.light{ font-weight:400; line-height:1.36 }
 
-    /* Fototiras (hero y secciones) — garantizar scroll lateral en móvil */
-    .hscroll,
-    .hstrip{
-      display:flex;
-      gap:8px;
-      overflow-x:auto !important;
-      overflow-y:hidden;
+    /* Carrusel SOLO del hero (permite horizontal) */
+    .hero-strip{
+      display:flex; gap:8px;
+      overflow-x:auto; overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
       scroll-snap-type:x proximity;
       max-width:100%;
-      padding:0;
       overscroll-behavior-x:contain;
-      touch-action:pan-x; /* gestos horizontales */
-      cursor:grab;
+      touch-action: pan-x; /* solo aquí habilitamos horizontal */
+      height:var(--stripH);
+      align-items:center; justify-content:flex-start;
       scrollbar-width:thin;
+      margin-inline:auto;
     }
-    .hstrip{ gap:12px; padding-bottom:6px }
-    .hscroll::-webkit-scrollbar,
-    .hstrip::-webkit-scrollbar{ height:6px }
-    .hscroll::-webkit-scrollbar-thumb,
-    .hstrip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
-
-    .hero-strip{ height:var(--stripH); align-items:center; justify-content:center; }
     .hero-strip .hitem{ flex:0 0 auto; height:100%; scroll-snap-align:start }
-    .hero-strip .hitem img{ height:100%; width:auto; aspect-ratio:4/3; object-fit:cover; border-radius:10px; display:block }
-
-    .hstrip .hitem{ flex:0 0 auto; width:clamp(120px, 26vw, 180px); scroll-snap-align:start }
-    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
-    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:14px; margin-top:6px }
+    .hero-strip .hitem img{ height:100%; width:auto; object-fit:cover; border-radius:10px; display:block }
+    .hero-strip::-webkit-scrollbar{ height:6px }
+    .hero-strip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
 
     /* Zonas */
     .zones{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:0 }
     .zone{ background:#1b1b1b; color:#eaeaea; padding:4px 9px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap }
 
-    /* Fila 3: hint abajo centrado */
+    /* Hint abajo */
     .scrollhint{ text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px }
 
-    /* Secciones inferiores */
+    /* Secciones inferiores (como en v16.2) */
     section{ padding:28px 0 }
     .card{ background:var(--card); border-radius:var(--radius); padding:20px }
     h2.title{ margin:0 0 8px; font-size:clamp(20px,3.2vw,26px); color:#fff; font-weight:700 }
@@ -97,6 +89,17 @@
     .two-col{ display:grid; gap:16px; grid-template-columns:1.1fr .9fr }
     .two-col > div{ min-width:0 }
     @media (max-width:860px){ .two-col{ grid-template-columns:1fr } }
+
+    .hstrip{
+      display:flex; gap:12px;
+      overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
+      overscroll-behavior-x:contain; touch-action: pan-x;
+    }
+    .hstrip .hitem{ flex:0 0 auto; width:clamp(120px, 26vw, 180px); scroll-snap-align:start }
+    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
+    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:14px; margin-top:6px }
 
     .video{ position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden }
     .video iframe, .video video{ width:100%; height:100%; border:0; display:block }
@@ -119,7 +122,7 @@
       <a href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener" aria-label="TikTok">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
       </a>
-      <a href="mailto:dein_email@email.com" aria-label="E‑Mail">
+      <a href="mailto:hectorinmuenchen@gmail.com" aria-label="E‑Mail">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
       </a>
     </div>
@@ -129,7 +132,8 @@
       <div class="stack wrap">
         <h1>Hector</h1>
 
-        <div class="hscroll hero-strip" aria-label="Bilder von Hector">
+        <!-- Carrusel SOLO de fotos -->
+        <div class="hero-strip" aria-label="Bilder von Hector">
           <div class="hitem"><img src="images/profile.jpg" alt="Hector 1"></div>
           <div class="hitem"><img src="images/profile2.jpg" alt="Hector 2"></div>
           <div class="hitem"><img src="images/profile3.jpg" alt="Hector 3"></div>
@@ -302,22 +306,29 @@
   <footer class="wrap">© Hector · Mit Herz in München erstellt</footer>
 
   <script>
-    // Fallback: drag-to-scroll con ratón/touch para .hscroll y .hstrip
-    for (const el of document.querySelectorAll('.hscroll, .hstrip')){
-      let isDown=false, startX=0, scrollLeft=0;
-      el.addEventListener('pointerdown', (e)=>{
-        isDown=true; el.setPointerCapture(e.pointerId);
-        el.style.cursor='grabbing'; startX=e.clientX; scrollLeft=el.scrollLeft;
-      });
-      el.addEventListener('pointermove', (e)=>{
-        if(!isDown) return;
-        const dx=e.clientX - startX;
-        el.scrollLeft = scrollLeft - dx;
-      });
-      ['pointerup','pointerleave','pointercancel'].forEach(type=>{
-        el.addEventListener(type, ()=>{ isDown=false; el.style.cursor='grab'; });
-      });
-    }
+    // JS defensivo: bloquea gestos horizontales en el HERO excepto dentro de .hero-strip
+    (function(){
+      const hero = document.getElementById('hero');
+      const strip = hero.querySelector('.hero-strip');
+      let startX=0, startY=0, active=false;
+      hero.addEventListener('touchstart', (e)=>{
+        const t = e.touches[0];
+        startX = t.clientX; startY = t.clientY; active = true;
+      }, {passive:true});
+      hero.addEventListener('touchmove', (e)=>{
+        if(!active) return;
+        const t = e.touches[0];
+        const dx = Math.abs(t.clientX - startX);
+        const dy = Math.abs(t.clientY - startY);
+        const insideStrip = e.target.closest && e.target.closest('.hero-strip');
+        // Si el gesto es más horizontal que vertical y NO estamos sobre la tira, bloqueamos
+        if(dx > dy && !insideStrip){
+          e.preventDefault();
+        }
+      }, {passive:false});
+      hero.addEventListener('touchend', ()=>{ active=false; }, {passive:true});
+      hero.addEventListener('touchcancel', ()=>{ active=false; }, {passive:true});
+    })();
   </script>
 </body>
 </html>
