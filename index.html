@@ -90,16 +90,18 @@
     .two-col > div{ min-width:0 }
     @media (max-width:860px){ .two-col{ grid-template-columns:1fr } }
 
-    .hstrip{
-      display:flex; gap:6px;
-      overflow-x:auto; overflow-y:hidden;
-      -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
-      overscroll-behavior-x:contain; touch-action: pan-x;
-    }
-    .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start }
-    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
-    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:14px; margin-top:6px }
+      /* Carruseles de secciones */
+  .hstrip{
+    display:flex; gap:8px;   /* antes 6px + márgenes → ahora mismo valor que hero */
+    overflow-x:auto; overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
+    overscroll-behavior-x:contain; touch-action: pan-x;
+  }
+  .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start; margin:0 } /* quitamos márgenes extra */
+  .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
+  .hstrip .hitem figcaption{ color:#c9c9c9; font-size:14px; margin-top:4px } /* menos margen bajo la foto */
+
 
     .video{ position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden }
     .video iframe, .video video{ width:100%; height:100%; border:0; display:block }
