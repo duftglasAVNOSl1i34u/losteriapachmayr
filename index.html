@@ -63,7 +63,7 @@
       scroll-snap-type:x proximity;
       max-width:100%;
       overscroll-behavior-x:contain;
-      touch-action: pan-x; /* solo aquí habilitamos horizontal */
+      touch-action: pan-x pan-y; /* solo aquí habilitamos horizontal */
       height:var(--stripH);
       align-items:center; justify-content:flex-start;
       scrollbar-width:thin;
@@ -96,7 +96,7 @@
     overflow-x:auto; overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
     scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
-    overscroll-behavior-x:contain; touch-action: pan-x;
+    overscroll-behavior-x:contain; touch-action: pan-x pan-y;
   }
   .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start; margin:0 } /* quitamos márgenes extra */
   .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
@@ -278,7 +278,8 @@
         </div>
       </div>
     </section>
-
+    
+<!-- VIDEO 
     <section aria-label="Video">
       <div class="card">
         <h2 class="title">Kurzes Video</h2>
@@ -288,7 +289,8 @@
         <p class="lead">20–30 Sekunden, aufgenommen in München – damit man mich direkt sprechen sieht.</p>
       </div>
     </section>
-
+-->
+    
     <section aria-label="Kontakt">
       <div class="card" style="text-align:center">
         <h2 class="title">Kontakt</h2>
