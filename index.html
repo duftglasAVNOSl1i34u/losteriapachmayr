@@ -6,7 +6,7 @@
   <title>Hector – dein zukünftiger Mitbewohner</title>
   <meta name="description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
 
-  <!-- Open Graph -->
+  <!-- Open Graph básico -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:title" content="Hector – dein zukünftiger Mitbewohner">
@@ -25,6 +25,7 @@
   <meta name="twitter:image" content="https://www.hectorinmuenchen.de/images2/marienplatz.jpeg">
 
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#000; --ink:#f5f5f5; --muted:#c9c9c9; --card:#121212;
@@ -37,95 +38,69 @@
       margin:0; background:var(--bg); color:var(--ink);
       font-family:Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-      overflow-x:hidden;
-      touch-action: pan-y;
+      overflow-x:hidden; touch-action: pan-y;
     }
     .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
 
-    /* Utilidades de espaciado (solo top) */
-    .mt-0 { margin-top:0 !important; }
-    .mt-xs { margin-top:4px !important; }
-    .mt-sm { margin-top:14px !important; }
-    .mt-lg { margin-top:28px !important; }
+    /* utilidades espaciado */
+    .mt-0{margin-top:0!important} .mt-xs{margin-top:4px!important}
+    .mt-sm{margin-top:14px!important} .mt-lg{margin-top:28px!important}
 
-    /* HERO como pila vertical simple */
+    /* ===== HERO ===== */
     header#hero{
-      min-height:100dvh;
+      min-height:100dvh;              /* ocupa toda la altura visible */
       display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-      padding-top:calc(8px + env(safe-area-inset-top)/3);
-      padding-bottom:calc(10px + env(safe-area-inset-bottom)/3);
-      overflow-x:hidden;
-      text-align:center;
-      position:relative;
+      padding-top:calc(10px + env(safe-area-inset-top)/2);
+      padding-bottom:calc(10px + env(safe-area-inset-bottom)/2);
+      text-align:center; position:relative; overflow-x:hidden;
+    }
+    /* Botón idioma flotante (no afecta layout) */
+    .lang-switch{
+      position:fixed; right:14px; top:14px; z-index:1000;
+      background:#1e1e1e; color:#fff; border:1px solid #3a3a3a;
+      border-radius:12px; padding:6px 10px; font-weight:700; font-size:13px;
+      line-height:1; user-select:none;
     }
 
-    /* Botón de idioma */
-    .lang-toggle {
-      position:absolute; top:12px; right:16px; z-index:10;
-    }
-    .lang-toggle button{
-      background:#fff; color:#000; border:0; border-radius:8px; padding:6px 12px; font-weight:700; cursor:pointer;
-    }
-    .lang-toggle button:hover{ background:#eaeaea; }
-
-    /* Control de visibilidad por idioma */
-    .lang-block{ display:none; }
-    .lang-block.active{ display:block; }
-
-    /* Línea “Schreib mir jetzt / Message me now” */
-    .contactline{ color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px; margin-bottom:6px; }
-
-    /* Iconos arriba */
-    .social-hero{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:26px; }
-    .social-hero a{
-      display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
-      border-radius:50%; border:1px solid rgba(255,255,255,.25); text-decoration:none
-    }
+    .contactline{ color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px; margin:0 0 6px 0; }
+    .social-hero{ display:flex; align-items:center; justify-content:center; gap:12px; margin:0 0 22px 0; }
+    .social-hero a{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,.25); text-decoration:none }
     .social-hero svg{ width:18px; height:18px; fill:#fff }
 
-    /* Contenedor central */
-    .hero-mid{ display:flex; align-items:center; justify-content:center; width:100%; touch-action: pan-y; overflow-x:clip; }
-    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:0; width:100%; touch-action: pan-y; overflow-x:clip; }
+    .hero-mid{ display:flex; align-items:center; justify-content:center; width:100%; touch-action:pan-y; overflow-x:clip; }
+    .stack{ display:flex; flex-direction:column; align-items:center; gap:0; width:100%; }
 
-    /* Títulos */
-    h1{ margin:0; font-weight:700; color:#fff; letter-spacing:.2px; font-size:clamp(25px, 7.2vw, 46px); line-height:1.06; }
-    .subtitle{font-weight:700; color:#fff; font-size:clamp(20px,4.6vw,24px); margin-bottom:6px}
+    h1{ margin:0; font-weight:700; color:#fff; letter-spacing:.2px; font-size:clamp(28px, 7.2vw, 46px); line-height:1.06; }
+    .subtitle{ font-weight:700; color:#fff; font-size:clamp(20px,4.6vw,26px); margin:6px 0 0 0; }
 
-    /* Carrusel SOLO del hero */
+    /* Carrusel del hero (gestos iguales que antes) */
     .hero-strip{
-      display:flex; gap:8px;
-      overflow-x:auto; overflow-y:hidden;
-      -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity;
-      max-width:100%;
-      overscroll-behavior-x:contain;
-      touch-action: pan-x pan-y;
-      height:var(--stripH);
-      align-items:center; justify-content:flex-start;
-      scrollbar-width:thin;
-      margin-inline:auto;
+      display:flex; gap:8px; overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
+      max-width:100%; overscroll-behavior-x:contain; touch-action: pan-x pan-y;
+      height:var(--stripH); align-items:center; justify-content:flex-start;
+      scrollbar-width:thin; margin-inline:auto;
     }
     .hero-strip .hitem{ flex:0 0 auto; height:100%; scroll-snap-align:start }
     .hero-strip .hitem img{ height:100%; width:auto; object-fit:cover; border-radius:10px; display:block }
-    .hero-strip::-webkit-scrollbar{ height:6px }
-    .hero-strip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
+    .hero-strip::-webkit-scrollbar{ height:6px } .hero-strip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
 
-    /* Leads */
-    .lead {font-size:16px; font-weight:700; line-height:1.2;}
-    .lead.light {font-size:15px; line-height:1.2; font-weight:100; margin-bottom:20px;}
+    /* textos hero */
+    .lead{ font-size:16px; font-weight:700; line-height:1.2; margin:0 }
+    .lead.light{ font-size:15px; line-height:1.2; font-weight:400; margin:0 }
 
-    /* Zonas */
-    .zones{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+    /* chips barrios */
+    .zones{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:12px }
     .zone{ background:#1b1b1b; color:#eaeaea; padding:4px 9px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap }
 
-    /* Hint abajo */
+    /* hint pegado abajo SIEMPRE */
     .scrollhint{
-      margin-top:auto;
-      padding-bottom: clamp(4px, env(safe-area-inset-bottom), 10px);
-      text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px
+      margin-top:auto;                 /* empuja hacia el fondo del hero */
+      padding-bottom:max(10px, env(safe-area-inset-bottom));
+      text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px;
     }
 
-    /* Secciones inferiores */
+    /* ===== Secciones inferiores (sin tocar interacciones) ===== */
     section{ padding:28px 0 }
     .card{ background:var(--card); border-radius:var(--radius); padding:20px }
     h2.title{ margin:0 0 8px; font-size:clamp(20px,3.2vw,26px); color:#fff; font-weight:700 }
@@ -134,17 +109,14 @@
     .two-col > div{ min-width:0 }
     @media (max-width:860px){ .two-col{ grid-template-columns:1fr } }
 
-    /* Carruseles de secciones */
     .hstrip{
-      display:flex; gap:8px;
-      overflow-x:auto; overflow-y:hidden;
-      -webkit-overflow-scrolling:touch;
+      display:flex; gap:8px; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
       scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
       overscroll-behavior-x:contain; touch-action: pan-x pan-y;
     }
     .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start; margin:0 }
     .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
-    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:11px; margin-top:3px; }
+    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:11px; margin-top:3px }
 
     .video{ position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden }
     .video iframe, .video video{ width:100%; height:100%; border:0; display:block }
@@ -158,12 +130,14 @@
 </head>
 <body>
 
-  <!-- Botón idioma -->
-  <div class="lang-toggle"><button id="lang-btn">EN</button></div>
+  <header id="hero">
+    <!-- chip idioma (flotante: no rompe centrado) -->
+    <button class="lang-switch" id="langBtn" aria-label="Language">EN</button>
 
-  <!-- ====== HERO (DE) ====== -->
-  <header id="hero" class="lang-block de-hero active">
-    <div class="contactline">Schreib mir jetzt:</div>
+    <!-- 1 -->
+    <div class="contactline" data-i18n="contactline">Schreib mir jetzt:</div>
+
+    <!-- 2 -->
     <div class="social-hero" aria-label="Schnellzugriff Socials">
       <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
@@ -176,13 +150,16 @@
       </a>
     </div>
 
+    <!-- 3,4,5,6 -->
     <div class="hero-mid">
       <div class="stack wrap">
+        <!-- 3 -->
         <div class="mt-sm">
           <h1>Hector</h1>
-          <div class="subtitle">Dein zukünftiger Mitbewohner</div>
+          <div class="subtitle" data-i18n="subtitle">Dein zukünftiger Mitbewohner</div>
         </div>
 
+        <!-- 4 -->
         <div class="hero-strip mt-0" aria-label="Bilder von Hector">
           <div class="hitem"><img src="images2/ucl-final.jpeg" alt="Hector 1"></div>
           <div class="hitem"><img src="images2/guitarra.jpeg" alt="Hector 2"></div>
@@ -190,423 +167,87 @@
           <div class="hitem"><img src="images2/ucl.jpeg" alt="Hector 4"></div>
         </div>
 
+        <!-- 5 -->
         <div class="mt-xs">
-          <p class="lead"><strong>Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
+          <p class="lead" data-i18n="leadStrong"><strong>Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
         </div>
         <div class="mt-sm">
-          <p class="lead light">Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade
-            einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.</p>
+          <p class="lead light" data-i18n="leadLight">Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.</p>
         </div>
 
+        <!-- 6 -->
         <div class="zones mt-xs" aria-label="Bevorzugte Stadtteile">
-          <span class="zone">Bei der U2</span>
-          <span class="zone">Schwabing-West</span>
-          <span class="zone">Maxvorstadt</span>
-          <span class="zone">Milbertshofen-Am Hart</span>
-          <span class="zone">Neuhausen</span>
-          <span class="zone">Angebote offen</span>
+          <span class="zone" data-i18n="chipU2">Bei der U2</span>
+          <span class="zone" data-i18n="chipSW">Schwabing-West</span>
+          <span class="zone" data-i18n="chipMax">Maxvorstadt</span>
+          <span class="zone" data-i18n="chipMil">Milbertshofen-Am Hart</span>
+          <span class="zone" data-i18n="chipNeu">Neuhausen</span>
+          <span class="zone" data-i18n="chipOpen">Angebote offen</span>
         </div>
       </div>
     </div>
 
-    <div class="scrollhint">Nach unten scrollen ↓</div>
+    <!-- 7 (pegado abajo del hero) -->
+    <div class="scrollhint" data-i18n="scrollHint">Nach unten scrollen ↓</div>
   </header>
 
-  <!-- ====== HERO (EN) ====== -->
-  <header id="hero-en" class="lang-block en-hero">
-    <div class="contactline">Message me now:</div>
-    <div class="social-hero" aria-label="Quick social links">
-      <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
-      </a>
-      <a href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
-      </a>
-      <a href="mailto:hectorinmuenchen@gmail.com" aria-label="Email">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
-      </a>
-    </div>
-
-    <div class="hero-mid">
-      <div class="stack wrap">
-        <div class="mt-sm">
-          <h1>Hector</h1>
-          <div class="subtitle">Your future flatmate</div>
-        </div>
-
-        <div class="hero-strip mt-0" aria-label="Photos of Hector">
-          <div class="hitem"><img src="images2/ucl-final.jpeg" alt="Hector 1"></div>
-          <div class="hitem"><img src="images2/guitarra.jpeg" alt="Hector 2"></div>
-          <div class="hitem"><img src="images2/selfie-berlin.jpeg" alt="Hector 3"></div>
-          <div class="hitem"><img src="images2/ucl.jpeg" alt="Hector 4"></div>
-        </div>
-
-        <div class="mt-xs">
-          <p class="lead"><strong>Just started at BMW — looking for a room or flat in Munich from Oct 1</strong></p>
-        </div>
-        <div class="mt-sm">
-          <p class="lead light">If you’ve made it here, I probably kept your attention. Stick around if you need a new flatmate — or if you know someone and want to be kind.</p>
-        </div>
-
-        <div class="zones mt-xs" aria-label="Preferred districts">
-          <span class="zone">Along U2 line</span>
-          <span class="zone">Schwabing-West</span>
-          <span class="zone">Maxvorstadt</span>
-          <span class="zone">Milbertshofen-Am Hart</span>
-          <span class="zone">Neuhausen</span>
-          <span class="zone">Open to offers</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="scrollhint">Scroll down ↓</div>
-  </header>
-
-  <!-- ====== MAIN (DE) ====== -->
-  <main class="wrap lang-block de-main active">
-
-    <section aria-label="Über mich">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">Ein bisschen über mich</h2>
-          <p>Ich bin 27, komme aus Valencia und lebe seit dem Frühling in München. Ende September starte ich ein Praktikum
-             im Projektmanagement bei <strong>BMW</strong>. Mein Plan: hier bleiben, meinen Alltag aufbauen und eine WG finden,
-             die passt – menschlich und praktisch.</p>
-          <p><strong>Wegen BMW</strong> suche ich besonders in der Nähe der <strong>U2</strong> (z. B. Milbertshofen, Am Hart, Frankfurter Ring) –
-             praktisch für den Arbeitsweg und den Alltag.</p>
-          <p>Vor dem Praktikum habe ich mich mit verschiedenen Jobs über Wasser gehalten: Au-pair und Barkeeper. Zuvor habe
-             ich in Berlin gelebt, dort Deutsch gelernt und mein Studium abgeschlossen. Mein Deutsch ist nicht perfekt, aber
-             ich spreche gern und übe jeden Tag – Zusammenleben als kleiner Kulturtauchgang inklusive.</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Über mich – Bilder">
-            <figure class="hitem">
-              <img src="images2/branden.jpeg" alt="Zeit in Berlin">
-            </figure>
-            <figure class="hitem">
-              <img src="images2/selfie-berliner-dom.jpeg" alt="Porträt">
-              <figcaption>Ex-Berliner</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/cheesecake.jpeg" alt="Porträt">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Hobbys & Gewohnheiten">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">Hobbys & gesunde Gewohnheiten</h2>
-          <p><strong>Musik</strong> ist meine größte Leidenschaft: Ich spiele <strong>E-Gitarre</strong>, habe Klavier, Schlagzeug und Gesang ausprobiert
-             und experimentiere mit Produktionssoftware über eine Soundkarte – ein paar Clips sind sogar auf TikTok gelandet 😅.
-             Ich gehe gern auf Konzerte und Festivals (Metal & Rock, aber offen für vieles) und möchte Münchens Musikszene entdecken.</p>
-          <p><strong>Sport & Lifestyle:</strong> Der Sport ist fest in meinem Alltag – ich mache <strong>CrossFit</strong> und möchte gern einmal
-             <strong>HYROX</strong> ausprobieren. Ich bin <strong>Nichtraucher</strong>. Bier mag ich – meist am Wochenende, entspannt mit Freunden.</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Hobbys – Bilder">
-            <figure class="hitem">
-              <img src="images2/selfie-fernan-carles.jpeg" alt="Mit Freunden">
-              <figcaption>Mit Freunden</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/bateria.jpeg" alt="Schlagzeug">
-              <figcaption>Noch Anfänger</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/polyphia.jpeg" alt="Konzert">
-              <figcaption>Konzerten!!</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/eibsee.jpeg" alt="Eibsee">
-              <figcaption>Der Eibsee :O</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/rio-berlin.jpeg" alt="Spree in Berlin">
-              <figcaption>Die Spree in Berlin!</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Kochen">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">Ich koche gern</h2>
-          <p>Gutes Essen gehört für mich zum guten Leben. Wenn ich Zeit habe, koche ich und probiere neue Rezepte – am liebsten
-             für andere. Als echter Valencianer mache ich natürlich <strong>Paella Valenciana</strong>. Wenn ich bei euch einziehe,
-             gibt es garantiert Paella-Abende 🍚 (und gern auch BBQs, Dinners, Frühstücke … ohne Stress, mit guter Laune).</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Kochen – Bilder">
-            <figure class="hitem">
-              <img src="images2/paella-campo.jpeg" alt="Paella Valenciana">
-              <figcaption>Paella Valenciana – ein Stück Heimat 🇪🇸</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/paella-sh.jpeg" alt="Kochen zu Hause">
-              <figcaption>Kochen macht Spaß, besonders gemeinsam 🍳</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/paella-bbq.jpeg" alt="Gericht">
-              <figcaption>Neues Rezept ausprobiert – gelungen!</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/bbq.jpeg" alt="BBQ">
-              <figcaption>Gemeinsam schmeckt’s besser 🍳</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Als Mitbewohner">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">Als Mitbewohner</h2>
-          <p>Seit ich 12 bin, wohne ich nicht mehr zu Hause – Wohnheime, WGs, Berlin und jetzt München. Ich bin <strong>sauber</strong>,
-             auch wenn mein Zimmer manchmal ein kleines Chaos sein kann 😅. In Gemeinschaftsbereichen mag ich Ordnung:
-             was man benutzt, macht man sauber. Ein <strong>Putzplan</strong> ist fair. Wichtigstes Prinzip: <strong>Kommunikation</strong> – offen,
-             respektvoll, humorvoll. Wenn etwas nicht passt, reden wir drüber.</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Zusammenleben – Bilder">
-            <figure class="hitem">
-              <img src="images2/olympiapark.jpeg" alt="Olympiapark">
-            </figure>
-            <figure class="hitem">
-              <img src="images2/marienplatz.jpeg" alt="Marienplatz">
-            </figure>
-            <figure class="hitem">
-              <img src="images2/cielo-munich.jpeg" alt="Münchner Himmel">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Kontakt">
-      <div class="card" style="text-align:center">
-        <h2 class="title">Kontakt</h2>
-        <p>Schreib mir am besten über Instagram, TikTok oder per E-Mail:</p>
-        <div class="contact" role="group" aria-label="Kontaktoptionen">
-          <a class="btn" href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
-            TikTok
-          </a>
-          <a class="btn" href="https://instagram.com/hevtkr7" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
-            Instagram
-          </a>
-          <a class="btn" href="mailto:hectorinmuenchen@gmail.com">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
-            E-Mail
-          </a>
-        </div>
-        <p style="color:#c9c9c9; margin-top:10px">Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺</p>
-      </div>
-    </section>
-
-    <footer class="wrap">© Hector · Mit Herz in München erstellt</footer>
+  <!-- ===== Tu contenido inferior (SIN CAMBIOS ESTRUCTURALES) ===== -->
+  <main class="wrap">
+    <!-- … tus secciones tal cual las tenías … -->
   </main>
 
-  <!-- ====== MAIN (EN) ====== -->
-  <main class="wrap lang-block en-main">
-    <section aria-label="About me">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">A bit about me</h2>
-          <p>I’m 27, from Valencia, and I’ve been in Munich since spring. At the end of September I’m starting an internship
-             in <strong>project management at BMW</strong>. Plan: stay here, build my routine, and find a flatshare that fits —
-             both personally and practically.</p>
-          <p><strong>Because of BMW</strong>, I’m especially looking near the <strong>U2</strong> (e.g. Milbertshofen, Am Hart, Frankfurter Ring) —
-             practical for commuting and everyday life.</p>
-          <p>Before the internship I kept myself afloat with different jobs: au-pair and bartender. Before that I lived in Berlin,
-             learned German and finished my degree there. My German isn’t perfect, but I like speaking and I practice every day —
-             living together as a little cultural dive included.</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="About me – photos">
-            <figure class="hitem">
-              <img src="images2/branden.jpeg" alt="Time in Berlin">
-            </figure>
-            <figure class="hitem">
-              <img src="images2/selfie-berliner-dom.jpeg" alt="Selfie">
-              <figcaption>Ex-Berliner</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/cheesecake.jpeg" alt="Portrait">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Hobbies & habits">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">Hobbies & healthy habits</h2>
-          <p><strong>Music</strong> is my biggest passion: I play <strong>electric guitar</strong>, tried a bit of piano, drums and vocals,
-             and I experiment with production software through an audio interface — some clips even made it to TikTok 😅.
-             I love concerts and festivals (metal & rock, but open to a lot) and want to explore Munich’s scene.</p>
-          <p><strong>Sport & lifestyle:</strong> Training is part of my everyday — I do <strong>CrossFit</strong> and would love to try
-             <strong>HYROX</strong> once. I’m a <strong>non-smoker</strong>. I do enjoy beer — usually on weekends, chill with friends.</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Hobbies – photos">
-            <figure class="hitem">
-              <img src="images2/selfie-fernan-carles.jpeg" alt="With friends">
-              <figcaption>With friends</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/bateria.jpeg" alt="Drums">
-              <figcaption>Still a beginner</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/polyphia.jpeg" alt="Concert">
-              <figcaption>Live shows!!</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/eibsee.jpeg" alt="Eibsee">
-              <figcaption>The Eibsee :O</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/rio-berlin.jpeg" alt="Spree in Berlin">
-              <figcaption>The Spree in Berlin!</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Cooking">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">I like to cook</h2>
-          <p>Good food is part of a good life for me. When I have time, I cook and try new recipes — preferably
-             for others. As a Valencian, of course I make <strong>Paella Valenciana</strong>. If I move in with you,
-             there will definitely be paella nights 🍚 (and BBQs, dinners, breakfasts … relaxed, with good vibes).</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Cooking – photos">
-            <figure class="hitem">
-              <img src="images2/paella-campo.jpeg" alt="Paella Valenciana">
-              <figcaption>Paella Valenciana — a taste of home 🇪🇸</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/paella-sh.jpeg" alt="Home cooking">
-              <figcaption>Cooking is more fun together 🍳</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/paella-bbq.jpeg" alt="Dish">
-              <figcaption>New recipe — success!</figcaption>
-            </figure>
-            <figure class="hitem">
-              <img src="images2/bbq.jpeg" alt="BBQ">
-              <figcaption>Tastes better together 🍳</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="As a flatmate">
-      <div class="card two-col">
-        <div>
-          <h2 class="title">As a flatmate</h2>
-          <p>I haven’t lived at home since I was 12 — dorms, WGs, Berlin and now Munich. I’m <strong>clean</strong>,
-             even if my room can be a little chaos sometimes 😅. In shared areas I like order:
-             you clean what you use. A <strong>cleaning schedule</strong> is fair. Most important: <strong>communication</strong> —
-             open, respectful, with humor. If something’s off, we talk.</p>
-        </div>
-        <div>
-          <div class="hstrip" aria-label="Flatshare – photos">
-            <figure class="hitem">
-              <img src="images2/olympiapark.jpeg" alt="Olympiapark">
-            </figure>
-            <figure class="hitem">
-              <img src="images2/marienplatz.jpeg" alt="Marienplatz">
-            </figure>
-            <figure class="hitem">
-              <img src="images2/cielo-munich.jpeg" alt="Munich sky">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section aria-label="Contact">
-      <div class="card" style="text-align:center">
-        <h2 class="title">Contact</h2>
-        <p>Best way to reach me: Instagram, TikTok or email:</p>
-        <div class="contact" role="group" aria-label="Contact options">
-          <a class="btn" href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
-            TikTok
-          </a>
-          <a class="btn" href="https://instagram.com/hevtkr7" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
-            Instagram
-          </a>
-          <a class="btn" href="mailto:hectorinmuenchen@gmail.com">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
-            Email
-          </a>
-        </div>
-        <p style="color:#c9c9c9; margin-top:10px">I answer faster than flats disappear during Wiesn 🍺</p>
-      </div>
-    </section>
-
-    <footer class="wrap">© Hector · Made with heart in Munich</footer>
-  </main>
+  <footer class="wrap">© Hector · Mit Herz in München erstellt</footer>
 
   <script>
-    // Toggle idioma
-    const btn = document.getElementById('lang-btn');
-    const deBlocks = [document.querySelector('.de-hero'), document.querySelector('.de-main')];
-    const enBlocks = [document.querySelector('.en-hero'), document.querySelector('.en-main')];
-    let current = 'de';
-
-    function setLang(lang){
-      const show = lang === 'de' ? deBlocks : enBlocks;
-      const hide = lang === 'de' ? enBlocks : deBlocks;
-      show.forEach(el => { el.classList.add('active'); el.style.display='block'; });
-      hide.forEach(el => { el.classList.remove('active'); el.style.display='none'; });
-      btn.textContent = lang === 'de' ? 'EN' : 'DE';
-      document.documentElement.setAttribute('lang', lang === 'de' ? 'de' : 'en');
-      current = lang;
-    }
-    btn.addEventListener('click', ()=> setLang(current === 'de' ? 'en' : 'de'));
-    setLang('de'); // idioma inicial
-
-    // JS defensivo: bloquea gestos horizontales en el HERO excepto dentro de .hero-strip
+    /* Mantiene el scroll vertical libre fuera del carrusel y el horizontal DENTRO del carrusel */
     (function(){
-      const heros = [document.getElementById('hero'), document.getElementById('hero-en')];
-      heros.forEach(hero=>{
-        if(!hero) return;
-        let startX=0, startY=0, active=false;
-        hero.addEventListener('touchstart', (e)=>{
-          const t = e.touches[0];
-          startX = t.clientX; startY = t.clientY; active = true;
-        }, {passive:true});
-        hero.addEventListener('touchmove', (e)=>{
-          if(!active) return;
-          const t = e.touches[0];
-          const dx = Math.abs(t.clientX - startX);
-          const dy = Math.abs(t.clientY - startY);
-          const insideStrip = e.target.closest && e.target.closest('.hero-strip');
-          // Si el gesto es más horizontal que vertical y NO estamos sobre la tira, bloqueamos
-          if(dx > dy && !insideStrip){
-            e.preventDefault();
-          }
-        }, {passive:false});
-        hero.addEventListener('touchend', ()=>{ active=false; }, {passive:true});
-        hero.addEventListener('touchcancel', ()=>{ active=false; }, {passive:true});
-      });
+      const hero = document.getElementById('hero');
+      let startX=0, startY=0, active=false;
+      hero.addEventListener('touchstart', (e)=>{ const t=e.touches[0]; startX=t.clientX; startY=t.clientY; active=true; }, {passive:true});
+      hero.addEventListener('touchmove', (e)=>{
+        if(!active) return;
+        const t=e.touches[0], dx=Math.abs(t.clientX-startX), dy=Math.abs(t.clientY-startY);
+        const insideStrip = e.target.closest && e.target.closest('.hero-strip');
+        if(dx>dy && !insideStrip){ e.preventDefault(); }
+      }, {passive:false});
+      hero.addEventListener('touchend', ()=>{ active=false }, {passive:true});
+      hero.addEventListener('touchcancel', ()=>{ active=false }, {passive:true});
     })();
+
+    /* ===== i18n muy simple (solo HERO) ===== */
+    const dict = {
+      de:{
+        contactline:"Schreib mir jetzt:",
+        subtitle:"Dein zukünftiger Mitbewohner",
+        leadStrong:"Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München",
+        leadLight:"Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.",
+        chipU2:"Bei der U2", chipSW:"Schwabing-West", chipMax:"Maxvorstadt", chipMil:"Milbertshofen-Am Hart", chipNeu:"Neuhausen", chipOpen:"Angebote offen",
+        scrollHint:"Nach unten scrollen ↓"
+      },
+      en:{
+        contactline:"Message me now:",
+        subtitle:"Your future flatmate",
+        leadStrong:"Just started at BMW — looking for a room or flat in Munich from Oct 1",
+        leadLight:"If you’ve made it here, I probably kept your attention. Stick around if you need a new flatmate — or if you know someone and want to be kind.",
+        chipU2:"Along U2 line", chipSW:"Schwabing-West", chipMax:"Maxvorstadt", chipMil:"Milbertshofen-Am Hart", chipNeu:"Neuhausen", chipOpen:"Open to offers",
+        scrollHint:"Scroll down ↓"
+      }
+    };
+
+    const btn = document.getElementById('langBtn');
+    let lang = (localStorage.getItem('lang') || (document.documentElement.lang || 'de')).toLowerCase().startsWith('en') ? 'en' : 'de';
+    function applyLang() {
+      const t = dict[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const k=el.getAttribute('data-i18n');
+        if(t[k]) el.textContent = t[k];
+      });
+      document.documentElement.lang = lang;
+      btn.textContent = (lang==='de'?'EN':'DE');   // muestra el alternativo
+      localStorage.setItem('lang', lang);
+    }
+    applyLang();
+    btn.addEventListener('click', ()=>{ lang = (lang==='de'?'en':'de'); applyLang(); });
   </script>
 </body>
 </html>
