@@ -6,7 +6,7 @@
   <title>Hector – dein zukünftiger Mitbewohner</title>
   <meta name="description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
 
-   <!-- Open Graph -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:title" content="Hector – dein zukünftiger Mitbewohner">
@@ -36,23 +36,31 @@
       margin:0; background:var(--bg); color:var(--ink);
       font-family:Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-      overflow-x:hidden; /* Bloquea desplazamiento lateral global */
+      overflow-x:hidden;
       touch-action: pan-y;
     }
     .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
 
-    /* HERO */
+    /* Utilidades de espaciado (solo top) */
+    .mt-0 { margin-top:0 !important; }
+    .mt-xs { margin-top:6px !important; }     /* muy poco */
+    .mt-sm { margin-top:14px !important; }    /* pequeño */
+    .mt-lg { margin-top:28px !important; }    /* grande */
+
+    /* HERO como pila vertical simple */
     header#hero{
-      height:100dvh;
-      display:grid;
-      grid-template-rows:auto 1fr auto; /* socials / content / hint */
+      min-height:100dvh;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
       padding-top:calc(8px + env(safe-area-inset-top)/3);
       padding-bottom:calc(10px + env(safe-area-inset-bottom)/3);
-      touch-action: pan-y;  /* hero solo vertical */
-      overflow-x:hidden;    /* evita que el hero se mueva lateral */
+      overflow-x:hidden;  /* evita desplazamiento lateral del hero */
+      text-align:center;
     }
- /* Hint arriba */
-    .contactline{ text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px; margin: 0;}
+
+    /* Línea "Schreib mir jetzt" */
+    .contactline{
+      color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px; margin:0;
+    }
 
     /* Iconos arriba */
     .social-hero{
@@ -64,18 +72,15 @@
     }
     .social-hero svg{ width:18px; height:18px; fill:#fff }
 
-    /* Contenido centrado (sin pan-x) */
+    /* Contenedor central */
     .hero-mid{ display:flex; align-items:center; justify-content:center; width:100%; touch-action: pan-y; overflow-x:clip; }
-    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; width:100%; touch-action: pan-y; overflow-x:clip; }
-    h1{
-      margin:0; font-weight:700; color:#fff; letter-spacing:.2px;
-      font-size:clamp(30px, 7.2vw, 46px); margin:1.2px; line-height:1.06;
-    }
-    .subtitle{font-weight:700; color:#fff; font-size:clamp(18px,4.6vw,24px); margin:0}
-    .lead{ color:var(--ink); font-size:clamp(14px,3.9vw,18px); margin:0; max-width:760px; font-weight:600; line-height:1.42 }
-    .lead.light{ font-weight:400; line-height:1.36 }
+    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:0; width:100%; touch-action: pan-y; overflow-x:clip; }
 
-    /* Carrusel SOLO del hero (permite horizontal) */
+    /* Títulos */
+    h1{ margin:0; font-weight:700; color:#fff; letter-spacing:.2px; font-size:clamp(30px, 7.2vw, 46px); line-height:1.06; }
+    .subtitle{font-weight:700; color:#fff; font-size:clamp(18px,4.6vw,24px); margin:0}
+
+    /* Carrusel SOLO del hero */
     .hero-strip{
       display:flex; gap:8px;
       overflow-x:auto; overflow-y:hidden;
@@ -83,7 +88,7 @@
       scroll-snap-type:x proximity;
       max-width:100%;
       overscroll-behavior-x:contain;
-      touch-action: pan-x pan-y; /* solo aquí habilitamos horizontal */
+      touch-action: pan-x pan-y; /* mantiene gesto horizontal y permite vertical */
       height:var(--stripH);
       align-items:center; justify-content:flex-start;
       scrollbar-width:thin;
@@ -99,9 +104,9 @@
     .zone{ background:#1b1b1b; color:#eaeaea; padding:4px 9px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap }
 
     /* Hint abajo */
-    .scrollhint{ text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px }
+    .scrollhint{ color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px }
 
-    /* Secciones inferiores (como en v16.2) */
+    /* Secciones inferiores (sin cambios) */
     section{ padding:28px 0 }
     .card{ background:var(--card); border-radius:var(--radius); padding:20px }
     h2.title{ margin:0 0 8px; font-size:clamp(20px,3.2vw,26px); color:#fff; font-weight:700 }
@@ -110,18 +115,17 @@
     .two-col > div{ min-width:0 }
     @media (max-width:860px){ .two-col{ grid-template-columns:1fr } }
 
-      /* Carruseles de secciones */
-  .hstrip{
-    display:flex; gap:8px;   /* antes 6px + márgenes → ahora mismo valor que hero */
-    overflow-x:auto; overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
-    overscroll-behavior-x:contain; touch-action: pan-x pan-y;
-  }
-  .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start; margin:0 } /* quitamos márgenes extra */
-  .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
-  .hstrip .hitem figcaption{ color:#c9c9c9; font-size:11px; margin-top:3px; } /* menos margen bajo la foto */
-
+    /* Carruseles de secciones (sin tocar interacciones) */
+    .hstrip{
+      display:flex; gap:8px;
+      overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
+      overscroll-behavior-x:contain; touch-action: pan-x pan-y;
+    }
+    .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start; margin:0 }
+    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
+    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:11px; margin-top:3px; }
 
     .video{ position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden }
     .video iframe, .video video{ width:100%; height:100%; border:0; display:block }
@@ -136,53 +140,62 @@
 <body>
 
   <header id="hero">
+    <!-- 1. Schreib mir jetzt -->
     <div class="contactline">Schreib mir jetzt:</div>
-    <!-- Iconos arriba -->
-    <div class="social-hero" aria-label="Schnellzugriff Socials">
+
+    <!-- 2. Iconos (pegado a 1: sin margen) -->
+    <div class="social-hero mt-0" aria-label="Schnellzugriff Socials">
       <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
       </a>
       <a href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener" aria-label="TikTok">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
       </a>
-      <a href="mailto:hectorinmuenchen@gmail.com" aria-label="E‑Mail">
+      <a href="mailto:hectorinmuenchen@gmail.com" aria-label="E-Mail">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
       </a>
     </div>
 
-    <!-- Contenido centrado -->
+    <!-- Contenido central en pila -->
     <div class="hero-mid">
       <div class="stack wrap">
-        <h1>Hector</h1>
 
-        <div class="subtitle">Dein zukünftiger Mitbewohner</div>
-    
-        <!-- Carrusel SOLO de fotos -->
-        <div class="hero-strip" aria-label="Bilder von Hector">
+        <!-- 3. Título + subtítulo (con espacio pequeño desde iconos) -->
+        <div class="mt-sm">
+          <h1>Hector</h1>
+          <div class="subtitle">Dein zukünftiger Mitbewohner</div>
+        </div>
+
+        <!-- 4. Carrusel (pegado al 3) -->
+        <div class="hero-strip mt-0" aria-label="Bilder von Hector">
           <div class="hitem"><img src="images2/ucl-final.jpeg" alt="Hector 1"></div>
           <div class="hitem"><img src="images2/guitarra.jpeg" alt="Hector 2"></div>
           <div class="hitem"><img src="images2/selfie-berlin.jpeg" alt="Hector 3"></div>
           <div class="hitem"><img src="images2/ucl.jpeg" alt="Hector 4"></div>
         </div>
 
-
-        <p class="lead"><strong>Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
-        <p class="lead light">Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade
-          einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.</p>
-
-        <div class="zones" aria-label="Bevorzugte Stadtteile">
-          <span class="zone">Bei der U2</span>
-          <span class="zone">Schwabing‑West</span>
-          <span class="zone">Maxvorstadt</span>
-          <span class="zone">Milbertshofen‑Am Hart</span>
-          <span class="zone">Neuhausen</span>
-          <span class="zone">Schwabing‑Freimann</span>
+        <!-- 5. Texto (muy poco desde carrusel) -->
+        <div class="mt-xs">
+          <p class="lead"><strong>Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
+          <p class="lead light">Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade
+            einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.</p>
         </div>
+
+        <!-- 6. Barrios (muy poco desde texto) -->
+        <div class="zones mt-xs" aria-label="Bevorzugte Stadtteile">
+          <span class="zone">Bei der U2</span>
+          <span class="zone">Schwabing-West</span>
+          <span class="zone">Maxvorstadt</span>
+          <span class="zone">Milbertshofen-Am Hart</span>
+          <span class="zone">Neuhausen</span>
+          <span class="zone">Schwabing-Freimann</span>
+        </div>
+
       </div>
     </div>
 
-    <!-- Hint abajo -->
-    <div class="scrollhint">Nach unten scrollen ↓</div>
+    <!-- 7. Hint (espacio grande desde barrios) -->
+    <div class="scrollhint mt-lg">Nach unten scrollen ↓</div>
   </header>
 
   <main class="wrap">
@@ -194,9 +207,9 @@
           <p>Ich bin 27, komme aus Valencia und lebe seit dem Frühling in München. Ende September starte ich ein Praktikum
              im Projektmanagement bei <strong>BMW</strong>. Mein Plan: hier bleiben, meinen Alltag aufbauen und eine WG finden,
              die passt – menschlich und praktisch.</p>
-          <p><strong>Wegen BMW</strong> suche ich besonders in der Nähe der <strong>U2</strong> (z. B. Milbertshofen, Am Hart, Frankfurter Ring) –
+          <p><strong>Wegen BMW</strong> suche ich besonders in der Nähe der <strong>U2</strong> (z. B. Milbertshofen, Am Hart, Frankfurter Ring) –
              praktisch für den Arbeitsweg und den Alltag.</p>
-          <p>Vor dem Praktikum habe ich mich mit verschiedenen Jobs über Wasser gehalten: Au‑pair und Barkeeper. Zuvor habe
+          <p>Vor dem Praktikum habe ich mich mit verschiedenen Jobs über Wasser gehalten: Au-pair und Barkeeper. Zuvor habe
              ich in Berlin gelebt, dort Deutsch gelernt und mein Studium abgeschlossen. Mein Deutsch ist nicht perfekt, aber
              ich spreche gern und übe jeden Tag – Zusammenleben als kleiner Kulturtauchgang inklusive.</p>
         </div>
@@ -205,7 +218,7 @@
             <figure class="hitem">
               <img src="images2/branden.jpeg" alt="Zeit in Berlin">
             </figure>
-              <figure class="hitem">
+            <figure class="hitem">
               <img src="images2/selfie-berliner-dom.jpeg" alt="Porträt">
               <figcaption>Ex Berliner</figcaption>
             </figure>
@@ -221,7 +234,7 @@
       <div class="card two-col">
         <div>
           <h2 class="title">Hobbys & gesunde Gewohnheiten</h2>
-          <p><strong>Musik</strong> ist meine größte Leidenschaft: Ich spiele <strong>E‑Gitarre</strong>, habe Klavier, Schlagzeug und Gesang ausprobiert
+          <p><strong>Musik</strong> ist meine größte Leidenschaft: Ich spiele <strong>E-Gitarre</strong>, habe Klavier, Schlagzeug und Gesang ausprobiert
              und experimentiere mit Produktionssoftware über eine Soundkarte – ein paar Clips sind sogar auf TikTok gelandet 😅.
              Ich gehe gern auf Konzerte und Festivals (Metal & Rock, aber offen für vieles) und möchte Münchens Musikszene entdecken.</p>
           <p><strong>Sport & Lifestyle:</strong> Der Sport ist fest in meinem Alltag – ich mache <strong>CrossFit</strong> und möchte gern einmal
@@ -229,16 +242,16 @@
         </div>
         <div>
           <div class="hstrip" aria-label="Hobbys – Bilder">
-             <figure class="hitem">
+            <figure class="hitem">
               <img src="images2/selfie-fernan-carles.jpeg" alt="Musikproduktion">
               <figcaption>Mit Freunde</figcaption>
             </figure>
             <figure class="hitem">
-              <img src="images2/bateria.jpeg" alt="E‑Gitarre">
+              <img src="images2/bateria.jpeg" alt="E-Gitarre">
               <figcaption>noch Anfänger</figcaption>
             </figure>
             <figure class="hitem">
-              <img src="images2/polyphia.jpeg" alt="E‑Gitarre">
+              <img src="images2/polyphia.jpeg" alt="E-Gitarre">
               <figcaption>Konzerten!!</figcaption>
             </figure>
             <figure class="hitem">
@@ -249,13 +262,10 @@
               <img src="images2/rio-berlin.jpeg" alt="Konzert">
               <figcaption>der Spree in Berlin!</figcaption>
             </figure>
-           
           </div>
         </div>
       </div>
     </section>
-
-   
 
     <section aria-label="Kochen">
       <div class="card two-col">
@@ -263,7 +273,7 @@
           <h2 class="title">Ich koche gern</h2>
           <p>Gutes Essen gehört für mich zum guten Leben. Wenn ich Zeit habe, koche ich und probiere neue Rezepte – am liebsten
              für andere. Als echter Valencianer mache ich natürlich <strong>Paella Valenciana</strong>. Wenn ich bei euch einziehe,
-             gibt es garantiert Paella‑Abende 🍚 (und gern auch BBQs, Dinners, Frühstücke … ohne Stress, mit guter Laune).</p>
+             gibt es garantiert Paella-Abende 🍚 (und gern auch BBQs, Dinners, Frühstücke … ohne Stress, mit guter Laune).</p>
         </div>
         <div>
           <div class="hstrip" aria-label="Kochen – Bilder">
@@ -288,7 +298,7 @@
       </div>
     </section>
 
-     <section aria-label="Als Mitbewohner">
+    <section aria-label="Als Mitbewohner">
       <div class="card two-col">
         <div>
           <h2 class="title">Als Mitbewohner</h2>
@@ -299,7 +309,7 @@
         </div>
         <div>
           <div class="hstrip" aria-label="Zusammenleben – Bilder">
-          <figure class="hitem">
+            <figure class="hitem">
               <img src="images2/olympiapark.jpeg" alt="Porträt">
             </figure>
             <figure class="hitem">
@@ -308,13 +318,12 @@
             <figure class="hitem">
               <img src="images2/cielo-munich.jpeg" alt="Porträt">
             </figure>
-            </figure>
           </div>
         </div>
       </div>
     </section>
-    
-<!-- VIDEO 
+
+    <!-- VIDEO (comentado)
     <section aria-label="Video">
       <div class="card">
         <h2 class="title">Kurzes Video</h2>
@@ -324,12 +333,12 @@
         <p class="lead">20–30 Sekunden, aufgenommen in München – damit man mich direkt sprechen sieht.</p>
       </div>
     </section>
--->
-    
+    -->
+
     <section aria-label="Kontakt">
       <div class="card" style="text-align:center">
         <h2 class="title">Kontakt</h2>
-        <p>Schreib mir am besten über Instagram, TikTok oder per E‑Mail:</p>
+        <p>Schreib mir am besten über Instagram, TikTok oder per E-Mail:</p>
         <div class="contact" role="group" aria-label="Kontaktoptionen">
           <a class="btn" href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
@@ -341,7 +350,7 @@
           </a>
           <a class="btn" href="mailto:hectorinmuenchen@gmail.com">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
-            E‑Mail
+            E-Mail
           </a>
         </div>
         <p style="color:#c9c9c9; margin-top:10px">Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺</p>
