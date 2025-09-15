@@ -3,26 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hector – dein zukünftiger Mitbewohner</title>
-  <meta name="description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
+  <title data-i18n-head="title">Hector – dein zukünftiger Mitbewohner</title>
+  <meta id="meta-desc" name="description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="de_DE">
-  <meta property="og:title" content="Hector – dein zukünftiger Mitbewohner">
-  <meta property="og:description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
+  <meta id="og-locale" property="og:locale" content="de_DE">
+  <meta id="og-title" property="og:title" content="Hector – dein zukünftiger Mitbewohner">
+  <meta id="og-desc" property="og:description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
   <meta property="og:url" content="https://www.hectorinmuenchen.de/">
   <meta property="og:image" content="https://www.hectorinmuenchen.de/images2/marienplatz.jpeg">
   <meta property="og:image:secure_url" content="https://www.hectorinmuenchen.de/images2/marienplatz.jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Hector – WG-Zimmer in München gesucht">
+  <meta id="og-image-alt" property="og:image:alt" content="Hector – WG-Zimmer in München gesucht">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hector – dein zukünftiger Mitbewohner">
-  <meta name="twitter:description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
+  <meta id="tw-title" name="twitter:title" content="Hector – dein zukünftiger Mitbewohner">
+  <meta id="tw-desc" name="twitter:description" content="Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München">
   <meta name="twitter:image" content="https://www.hectorinmuenchen.de/images2/marienplatz.jpeg">
+
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -55,6 +56,17 @@
       padding-bottom:calc(10px + env(safe-area-inset-bottom)/3);
       overflow-x:hidden;  /* evita desplazamiento lateral del hero */
       text-align:center;
+      position:relative; /* añadido solo para posicionar el selector de idioma */
+    }
+
+    /* Botón selector de idioma */
+    .lang-toggle{
+      position:absolute; top:10px; right:12px;
+      padding:8px 12px; font-weight:700; font-size:13px; line-height:1;
+      border-radius:999px; border:1px solid rgba(255,255,255,.25);
+      background:#101010; color:#fff; text-decoration:none; cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select:none;
     }
 
     /* Línea "Schreib mir jetzt" */
@@ -137,17 +149,20 @@
     .btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; background:#fff; color:#000; text-decoration:none; font-weight:700; border:0; }
     .btn svg{ width:18px; height:18px; display:block }
 
-    footer{ padding:30px 0 48px; color:#c9c9c9; text-align:center; font-size:14px }
+    footer{ padding:30px 0 48px; color:var(--muted); text-align:center; font-size:14px }
   </style>
 </head>
 <body>
 
   <header id="hero">
+    <!-- Botón DE/EN -->
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Sprache wechseln">EN</button>
+
     <!-- 1. Schreib mir jetzt -->
-    <div class="contactline">Schreib mir jetzt:</div>
+    <div class="contactline" data-i18n="contactline">Schreib mir jetzt:</div>
 
     <!-- 2. Iconos (pegado a 1: sin margen) -->
-    <div class="social-hero mt-0" aria-label="Schnellzugriff Socials">
+    <div class="social-hero mt-0" aria-label="Schnellzugriff Socials" data-i18n-aria-label="social_aria">
       <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
       </a>
@@ -166,11 +181,11 @@
         <!-- 3. Título + subtítulo (con espacio pequeño desde iconos) -->
         <div class="mt-sm">
           <h1>Hector</h1>
-          <div class="subtitle">Dein zukünftiger Mitbewohner</div>
+          <div class="subtitle" data-i18n="subtitle">Dein zukünftiger Mitbewohner</div>
         </div>
 
         <!-- 4. Carrusel (pegado al 3) -->
-        <div class="hero-strip mt-0" aria-label="Bilder von Hector">
+        <div class="hero-strip mt-0" aria-label="Bilder von Hector" data-i18n-aria-label="hero_strip_aria">
           <div class="hitem"><img src="images2/ucl-final.jpeg" alt="Hector 1"></div>
           <div class="hitem"><img src="images2/guitarra.jpeg" alt="Hector 2"></div>
           <div class="hitem"><img src="images2/selfie-berlin.jpeg" alt="Hector 3"></div>
@@ -179,54 +194,62 @@
 
         <!-- 5. Texto (muy poco desde carrusel) -->
         <div class="mt-xs">
-          <p class="lead"><strong>Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
-         
+          <p class="lead"><strong data-i18n="lead_bmw">Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
         </div>
-<div class="mt-sm">
- <p class="lead light">Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade
-            einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.</p>
-   </div>
+
+        <div class="mt-sm">
+          <p class="lead light" data-i18n="lead_hook">
+            Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade
+            einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.
+          </p>
+        </div>
 
         <!-- 6. Barrios (muy poco desde texto) -->
-        <div class="zones mt-xs" aria-label="Bevorzugte Stadtteile">
-          <span class="zone">Bei der U2</span>
-          <span class="zone">Schwabing-West</span>
-          <span class="zone">Maxvorstadt</span>
-          <span class="zone">Milbertshofen-Am Hart</span>
-          <span class="zone">Neuhausen</span>
-          <span class="zone">Angebote offen</span>
+        <div class="zones mt-xs" aria-label="Bevorzugte Stadtteile" data-i18n-aria-label="zones_aria">
+          <span class="zone" data-i18n="zone_u2">Bei der U2</span>
+          <span class="zone" data-i18n="zone_schwabing">Schwabing-West</span>
+          <span class="zone" data-i18n="zone_maxvorstadt">Maxvorstadt</span>
+          <span class="zone" data-i18n="zone_milbert">Milbertshofen-Am Hart</span>
+          <span class="zone" data-i18n="zone_neuhausen">Neuhausen</span>
+          <span class="zone" data-i18n="zone_open">Angebote offen</span>
         </div>
 
       </div>
     </div>
 
     <!-- 7. Hint (espacio grande desde barrios) -->
-    <div class="scrollhint">Nach unten scrollen ↓</div>
+    <div class="scrollhint" data-i18n="scrollhint">Nach unten scrollen ↓</div>
   </header>
 
   <main class="wrap">
 
-    <section aria-label="Über mich">
+    <section aria-label="Über mich" data-i18n-aria-label="about_aria">
       <div class="card two-col">
         <div>
-          <h2 class="title">Ein bisschen über mich</h2>
-          <p>Ich bin 27, komme aus Valencia und lebe seit dem Frühling in München. Ende September starte ich ein Praktikum
-             im Projektmanagement bei <strong>BMW</strong>. Mein Plan: hier bleiben, meinen Alltag aufbauen und eine WG finden,
-             die passt – menschlich und praktisch.</p>
-          <p><strong>Wegen BMW</strong> suche ich besonders in der Nähe der <strong>U2</strong> (z. B. Milbertshofen, Am Hart, Frankfurter Ring) –
-             praktisch für den Arbeitsweg und den Alltag.</p>
-          <p>Vor dem Praktikum habe ich mich mit verschiedenen Jobs über Wasser gehalten: Au-pair und Barkeeper. Zuvor habe
-             ich in Berlin gelebt, dort Deutsch gelernt und mein Studium abgeschlossen. Mein Deutsch ist nicht perfekt, aber
-             ich spreche gern und übe jeden Tag – Zusammenleben als kleiner Kulturtauchgang inklusive.</p>
+          <h2 class="title" data-i18n="about_title">Ein bisschen über mich</h2>
+          <p data-i18n="about_p1">
+            Ich bin 27, komme aus Valencia und lebe seit dem Frühling in München. Ende September starte ich ein Praktikum
+            im Projektmanagement bei <strong>BMW</strong>. Mein Plan: hier bleiben, meinen Alltag aufbauen und eine WG finden,
+            die passt – menschlich und praktisch.
+          </p>
+          <p data-i18n="about_p2">
+            <strong>Wegen BMW</strong> suche ich besonders in der Nähe der <strong>U2</strong> (z. B. Milbertshofen, Am Hart, Frankfurter Ring) –
+            praktisch für den Arbeitsweg und den Alltag.
+          </p>
+          <p data-i18n="about_p3">
+            Vor dem Praktikum habe ich mich mit verschiedenen Jobs über Wasser gehalten: Au-pair und Barkeeper. Zuvor habe
+            ich in Berlin gelebt, dort Deutsch gelernt und mein Studium abgeschlossen. Mein Deutsch ist nicht perfekt, aber
+            ich spreche gern und übe jeden Tag – Zusammenleben als kleiner Kulturtauchgang inklusive.
+          </p>
         </div>
         <div>
-          <div class="hstrip" aria-label="Über mich – Bilder">
+          <div class="hstrip" aria-label="Über mich – Bilder" data-i18n-aria-label="about_strip_aria">
             <figure class="hitem">
-              <img src="images2/branden.jpeg" alt="Zeit in Berlin">
+              <img src="images2/branden.jpeg" alt="Zeit in Berlin" data-i18n-alt="img_berlin_alt">
             </figure>
             <figure class="hitem">
               <img src="images2/selfie-berliner-dom.jpeg" alt="Porträt">
-              <figcaption>Ex Berliner</figcaption>
+              <figcaption data-i18n="cap_ex_berliner">Ex Berliner</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/cheesecake.jpeg" alt="Porträt">
@@ -236,85 +259,93 @@
       </div>
     </section>
 
-    <section aria-label="Hobbys & Gewohnheiten">
+    <section aria-label="Hobbys & Gewohnheiten" data-i18n-aria-label="hobbies_aria">
       <div class="card two-col">
         <div>
-          <h2 class="title">Hobbys & gesunde Gewohnheiten</h2>
-          <p><strong>Musik</strong> ist meine größte Leidenschaft: Ich spiele <strong>E-Gitarre</strong>, habe Klavier, Schlagzeug und Gesang ausprobiert
-             und experimentiere mit Produktionssoftware über eine Soundkarte – ein paar Clips sind sogar auf TikTok gelandet 😅.
-             Ich gehe gern auf Konzerte und Festivals (Metal & Rock, aber offen für vieles) und möchte Münchens Musikszene entdecken.</p>
-          <p><strong>Sport & Lifestyle:</strong> Der Sport ist fest in meinem Alltag – ich mache <strong>CrossFit</strong> und möchte gern einmal
-             <strong>HYROX</strong> ausprobieren. Ich bin <strong>Nichtraucher</strong>. Bier mag ich – meist am Wochenende, entspannt mit Freunden.</p>
+          <h2 class="title" data-i18n="hobbies_title">Hobbys & gesunde Gewohnheiten</h2>
+          <p data-i18n="hobbies_p1">
+            <strong>Musik</strong> ist meine größte Leidenschaft: Ich spiele <strong>E-Gitarre</strong>, habe Klavier, Schlagzeug und Gesang ausprobiert
+            und experimentiere mit Produktionssoftware über eine Soundkarte – ein paar Clips sind sogar auf TikTok gelandet 😅.
+            Ich gehe gern auf Konzerte und Festivals (Metal & Rock, aber offen für vieles) und möchte Münchens Musikszene entdecken.
+          </p>
+          <p data-i18n="hobbies_p2">
+            <strong>Sport & Lifestyle:</strong> Der Sport ist fest in meinem Alltag – ich mache <strong>CrossFit</strong> und möchte gern einmal
+            <strong>HYROX</strong> ausprobieren. Ich bin <strong>Nichtraucher</strong>. Bier mag ich – meist am Wochenende, entspannt mit Freunden.
+          </p>
         </div>
         <div>
-          <div class="hstrip" aria-label="Hobbys – Bilder">
+          <div class="hstrip" aria-label="Hobbys – Bilder" data-i18n-aria-label="hobbies_strip_aria">
             <figure class="hitem">
-              <img src="images2/selfie-fernan-carles.jpeg" alt="Musikproduktion">
-              <figcaption>Mit Freunde</figcaption>
+              <img src="images2/selfie-fernan-carles.jpeg" alt="Musikproduktion" data-i18n-alt="img_music_alt">
+              <figcaption data-i18n="cap_mit_freunde">Mit Freunde</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/bateria.jpeg" alt="E-Gitarre">
-              <figcaption>noch Anfänger</figcaption>
+              <figcaption data-i18n="cap_noch_anf">noch Anfänger</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/polyphia.jpeg" alt="E-Gitarre">
-              <figcaption>Konzerten!!</figcaption>
+              <figcaption data-i18n="cap_konzerten">Konzerten!!</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/eibsee.jpeg" alt="Konzert">
-              <figcaption>der Eibsee :O</figcaption>
+              <figcaption data-i18n="cap_eibsee">der Eibsee :O</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/rio-berlin.jpeg" alt="Konzert">
-              <figcaption>der Spree in Berlin!</figcaption>
+              <figcaption data-i18n="cap_spree">der Spree in Berlin!</figcaption>
             </figure>
           </div>
         </div>
       </div>
     </section>
 
-    <section aria-label="Kochen">
+    <section aria-label="Kochen" data-i18n-aria-label="cook_aria">
       <div class="card two-col">
         <div>
-          <h2 class="title">Ich koche gern</h2>
-          <p>Gutes Essen gehört für mich zum guten Leben. Wenn ich Zeit habe, koche ich und probiere neue Rezepte – am liebsten
-             für andere. Als echter Valencianer mache ich natürlich <strong>Paella Valenciana</strong>. Wenn ich bei euch einziehe,
-             gibt es garantiert Paella-Abende 🍚 (und gern auch BBQs, Dinners, Frühstücke … ohne Stress, mit guter Laune).</p>
+          <h2 class="title" data-i18n="cook_title">Ich koche gern</h2>
+          <p data-i18n="cook_p1">
+            Gutes Essen gehört für mich zum guten Leben. Wenn ich Zeit habe, koche ich und probiere neue Rezepte – am liebsten
+            für andere. Als echter Valencianer mache ich natürlich <strong>Paella Valenciana</strong>. Wenn ich bei euch einziehe,
+            gibt es garantiert Paella-Abende 🍚 (und gern auch BBQs, Dinners, Frühstücke … ohne Stress, mit guter Laune).
+          </p>
         </div>
         <div>
-          <div class="hstrip" aria-label="Kochen – Bilder">
+          <div class="hstrip" aria-label="Kochen – Bilder" data-i18n-aria-label="cook_strip_aria">
             <figure class="hitem">
-              <img src="images2/paella-campo.jpeg" alt="Paella Valenciana">
-              <figcaption>Paella Valenciana – ein Stück Heimat 🇪🇸</figcaption>
+              <img src="images2/paella-campo.jpeg" alt="Paella Valenciana" data-i18n-alt="img_paella_alt">
+              <figcaption data-i18n="cap_paella1">Paella Valenciana – ein Stück Heimat 🇪🇸</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/paella-sh.jpeg" alt="Kochen zu Hause">
-              <figcaption>Kochen macht Spaß, besonders gemeinsam 🍳</figcaption>
+              <figcaption data-i18n="cap_cook_home">Kochen macht Spaß, besonders gemeinsam 🍳</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/paella-bbq.jpeg" alt="Gericht">
-              <figcaption>Neues Rezept ausprobiert – gelungen!</figcaption>
+              <figcaption data-i18n="cap_new_recipe">Neues Rezept ausprobiert – gelungen!</figcaption>
             </figure>
             <figure class="hitem">
               <img src="images2/bbq.jpeg" alt="Kochen zu Hause">
-              <figcaption>Kochen macht Spaß, besonders gemeinsam 🍳</figcaption>
+              <figcaption data-i18n="cap_cook_home2">Kochen macht Spaß, besonders gemeinsam 🍳</figcaption>
             </figure>
           </div>
         </div>
       </div>
     </section>
 
-    <section aria-label="Als Mitbewohner">
+    <section aria-label="Als Mitbewohner" data-i18n-aria-label="roommate_aria">
       <div class="card two-col">
         <div>
-          <h2 class="title">Als Mitbewohner</h2>
-          <p>Seit ich 12 bin, wohne ich nicht mehr zu Hause – Wohnheime, WGs, Berlin und jetzt München. Ich bin <strong>sauber</strong>,
-             auch wenn mein Zimmer manchmal ein kleines Chaos sein kann 😅. In Gemeinschaftsbereichen mag ich Ordnung:
-             was man benutzt, macht man sauber. Ein <strong>Putzplan</strong> ist fair. Wichtigstes Prinzip: <strong>Kommunikation</strong> – offen,
-             respektvoll, humorvoll. Wenn etwas nicht passt, reden wir drüber.</p>
+          <h2 class="title" data-i18n="roommate_title">Als Mitbewohner</h2>
+          <p data-i18n="roommate_p1">
+            Seit ich 12 bin, wohne ich nicht mehr zu Hause – Wohnheime, WGs, Berlin und jetzt München. Ich bin <strong>sauber</strong>,
+            auch wenn mein Zimmer manchmal ein kleines Chaos sein kann 😅. In Gemeinschaftsbereichen mag ich Ordnung:
+            was man benutzt, macht man sauber. Ein <strong>Putzplan</strong> ist fair. Wichtigstes Prinzip: <strong>Kommunikation</strong> – offen,
+            respektvoll, humorvoll. Wenn etwas nicht passt, reden wir drüber.
+          </p>
         </div>
         <div>
-          <div class="hstrip" aria-label="Zusammenleben – Bilder">
+          <div class="hstrip" aria-label="Zusammenleben – Bilder" data-i18n-aria-label="roommate_strip_aria">
             <figure class="hitem">
               <img src="images2/olympiapark.jpeg" alt="Porträt">
             </figure>
@@ -332,40 +363,40 @@
     <!-- VIDEO (comentado)
     <section aria-label="Video">
       <div class="card">
-        <h2 class="title">Kurzes Video</h2>
+        <h2 class="title" data-i18n="video_title">Kurzes Video</h2>
         <div class="video">
           <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Vorstellungsvideo"></iframe>
         </div>
-        <p class="lead">20–30 Sekunden, aufgenommen in München – damit man mich direkt sprechen sieht.</p>
+        <p class="lead" data-i18n="video_lead">20–30 Sekunden, aufgenommen in München – damit man mich direkt sprechen sieht.</p>
       </div>
     </section>
     -->
 
-    <section aria-label="Kontakt">
+    <section aria-label="Kontakt" data-i18n-aria-label="contact_aria">
       <div class="card" style="text-align:center">
-        <h2 class="title">Kontakt</h2>
-        <p>Schreib mir am besten über Instagram, TikTok oder per E-Mail:</p>
-        <div class="contact" role="group" aria-label="Kontaktoptionen">
+        <h2 class="title" data-i18n="contact_title">Kontakt</h2>
+        <p data-i18n="contact_p1">Schreib mir am besten über Instagram, TikTok oder per E-Mail:</p>
+        <div class="contact" role="group" aria-label="Kontaktoptionen" data-i18n-aria-label="contact_group_aria">
           <a class="btn" href="https://www.tiktok.com/@hevtkr" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
-            TikTok
+            <span data-i18n="btn_tiktok">TikTok</span>
           </a>
           <a class="btn" href="https://instagram.com/hevtkr7" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
-            Instagram
+            <span data-i18n="btn_instagram">Instagram</span>
           </a>
           <a class="btn" href="mailto:hectorinmuenchen@gmail.com">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
-            E-Mail
+            <span data-i18n="btn_email">E-Mail</span>
           </a>
         </div>
-        <p style="color:#c9c9c9; margin-top:10px">Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺</p>
+        <p style="color:#c9c9c9; margin-top:10px" data-i18n="contact_speed">Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺</p>
       </div>
     </section>
 
   </main>
 
-  <footer class="wrap">© Hector · Mit Herz in München erstellt</footer>
+  <footer class="wrap" data-i18n="footer">© Hector · Mit Herz in München erstellt</footer>
 
   <script>
     // JS defensivo: bloquea gestos horizontales en el HERO excepto dentro de .hero-strip
@@ -390,6 +421,236 @@
       }, {passive:false});
       hero.addEventListener('touchend', ()=>{ active=false; }, {passive:true});
       hero.addEventListener('touchcancel', ()=>{ active=false; }, {passive:true});
+    })();
+
+    // --- Multilenguaje mínimo, sin romper layout ---
+    (function(){
+      const t = {
+        de: {
+          // Head / metas / alt title
+          title: "Hector – dein zukünftiger Mitbewohner",
+          meta_desc: "Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München",
+          og_locale: "de_DE",
+          og_title: "Hector – dein zukünftiger Mitbewohner",
+          og_desc: "Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München",
+          og_image_alt: "Hector – WG-Zimmer in München gesucht",
+          tw_title: "Hector – dein zukünftiger Mitbewohner",
+          tw_desc: "Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München",
+
+          // Hero
+          contactline: "Schreib mir jetzt:",
+          social_aria: "Schnellzugriff Socials",
+          subtitle: "Dein zukünftiger Mitbewohner",
+          hero_strip_aria: "Bilder von Hector",
+          lead_bmw: "Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München",
+          lead_hook: "Wenn du hier bist, habe ich wohl deine Aufmerksamkeit gewonnen. Bleib dran, wenn du gerade einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.",
+          zones_aria: "Bevorzugte Stadtteile",
+          zone_u2: "Bei der U2",
+          zone_schwabing: "Schwabing-West",
+          zone_maxvorstadt: "Maxvorstadt",
+          zone_milbert: "Milbertshofen-Am Hart",
+          zone_neuhausen: "Neuhausen",
+          zone_open: "Angebote offen",
+          scrollhint: "Nach unten scrollen ↓",
+
+          // About
+          about_aria: "Über mich",
+          about_title: "Ein bisschen über mich",
+          about_p1: "Ich bin 27, komme aus Valencia und lebe seit dem Frühling in München. Ende September starte ich ein Praktikum im Projektmanagement bei BMW. Mein Plan: hier bleiben, meinen Alltag aufbauen und eine WG finden, die passt – menschlich und praktisch.",
+          about_p2: "Wegen BMW suche ich besonders in der Nähe der U2 (z. B. Milbertshofen, Am Hart, Frankfurter Ring) – praktisch für den Arbeitsweg und den Alltag.",
+          about_p3: "Vor dem Praktikum habe ich mich mit verschiedenen Jobs über Wasser gehalten: Au-pair und Barkeeper. Zuvor habe ich in Berlin gelebt, dort Deutsch gelernt und mein Studium abgeschlossen. Mein Deutsch ist nicht perfekt, aber ich spreche gern und übe jeden Tag – Zusammenleben als kleiner Kulturtauchgang inklusive.",
+          about_strip_aria: "Über mich – Bilder",
+          img_berlin_alt: "Zeit in Berlin",
+          cap_ex_berliner: "Ex Berliner",
+
+          // Hobbies
+          hobbies_aria: "Hobbys & Gewohnheiten",
+          hobbies_title: "Hobbys & gesunde Gewohnheiten",
+          hobbies_p1: "Musik ist meine größte Leidenschaft: Ich spiele E-Gitarre, habe Klavier, Schlagzeug und Gesang ausprobiert und experimentiere mit Produktionssoftware über eine Soundkarte – ein paar Clips sind sogar auf TikTok gelandet 😅. Ich gehe gern auf Konzerte und Festivals (Metal & Rock, aber offen für vieles) und möchte Münchens Musikszene entdecken.",
+          hobbies_p2: "Sport & Lifestyle: Der Sport ist fest in meinem Alltag – ich mache CrossFit und möchte gern einmal HYROX ausprobieren. Ich bin Nichtraucher. Bier mag ich – meist am Wochenende, entspannt mit Freunden.",
+          hobbies_strip_aria: "Hobbys – Bilder",
+          img_music_alt: "Musikproduktion",
+          cap_mit_freunde: "Mit Freunde",
+          cap_noch_anf: "noch Anfänger",
+          cap_konzerten: "Konzerten!!",
+          cap_eibsee: "der Eibsee :O",
+          cap_spree: "der Spree in Berlin!",
+
+          // Cooking
+          cook_aria: "Kochen",
+          cook_title: "Ich koche gern",
+          cook_p1: "Gutes Essen gehört für mich zum guten Leben. Wenn ich Zeit habe, koche ich und probiere neue Rezepte – am liebsten für andere. Als echter Valencianer mache ich natürlich Paella Valenciana. Wenn ich bei euch einziehe, gibt es garantiert Paella-Abende 🍚 (und gern auch BBQs, Dinners, Frühstücke … ohne Stress, mit guter Laune).",
+          cook_strip_aria: "Kochen – Bilder",
+          img_paella_alt: "Paella Valenciana",
+          cap_paella1: "Paella Valenciana – ein Stück Heimat 🇪🇸",
+          cap_cook_home: "Kochen macht Spaß, besonders gemeinsam 🍳",
+          cap_new_recipe: "Neues Rezept ausprobiert – gelungen!",
+          cap_cook_home2: "Kochen macht Spaß, besonders gemeinsam 🍳",
+
+          // Roommate
+          roommate_aria: "Als Mitbewohner",
+          roommate_title: "Als Mitbewohner",
+          roommate_p1: "Seit ich 12 bin, wohne ich nicht mehr zu Hause – Wohnheime, WGs, Berlin und jetzt München. Ich bin sauber, auch wenn mein Zimmer manchmal ein kleines Chaos sein kann 😅. In Gemeinschaftsbereichen mag ich Ordnung: was man benutzt, macht man sauber. Ein Putzplan ist fair. Wichtigstes Prinzip: Kommunikation – offen, respektvoll, humorvoll. Wenn etwas nicht passt, reden wir drüber.",
+          roommate_strip_aria: "Zusammenleben – Bilder",
+
+          // Contact
+          contact_aria: "Kontakt",
+          contact_title: "Kontakt",
+          contact_p1: "Schreib mir am besten über Instagram, TikTok oder per E-Mail:",
+          contact_group_aria: "Kontaktoptionen",
+          btn_tiktok: "TikTok",
+          btn_instagram: "Instagram",
+          btn_email: "E-Mail",
+          contact_speed: "Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺",
+
+          // Footer
+          footer: "© Hector · Mit Herz in München erstellt"
+        },
+        en: {
+          // Head / metas / alt title
+          title: "Hector – your future flatmate",
+          meta_desc: "I’ve started at BMW and I’m looking for a room or apartment in Munich from October 1.",
+          og_locale: "en_GB",
+          og_title: "Hector – your future flatmate",
+          og_desc: "I’ve started at BMW and I’m looking for a room or apartment in Munich from October 1.",
+          og_image_alt: "Hector – looking for a room in Munich",
+          tw_title: "Hector – your future flatmate",
+          tw_desc: "I’ve started at BMW and I’m looking for a room or apartment in Munich from October 1.",
+
+          // Hero
+          contactline: "Message me now:",
+          social_aria: "Quick access to socials",
+          subtitle: "Your future flatmate",
+          hero_strip_aria: "Photos of Hector",
+          lead_bmw: "I’ve started at BMW and I’m looking for a room or an apartment in Munich from October 1.",
+          lead_hook: "If you’re here, I’ve probably got your attention. Stick around if you’re looking for a new flatmate — or you know someone and want to help.",
+          zones_aria: "Preferred areas",
+          zone_u2: "Along U2 line",
+          zone_schwabing: "Schwabing-West",
+          zone_maxvorstadt: "Maxvorstadt",
+          zone_milbert: "Milbertshofen–Am Hart",
+          zone_neuhausen: "Neuhausen",
+          zone_open: "Open to offers",
+          scrollhint: "Scroll down ↓",
+
+          // About
+          about_aria: "About me",
+          about_title: "A bit about me",
+          about_p1: "I’m 27, from Valencia, and I’ve been living in Munich since spring. At the end of September I’m starting an internship in project management at BMW. My plan: stay here, build my routine, and find a flatshare that fits — personally and practically.",
+          about_p2: "Because of BMW I’m especially looking near the U2 line (e.g., Milbertshofen, Am Hart, Frankfurter Ring) — convenient for commuting and daily life.",
+          about_p3: "Before the internship I kept myself afloat with different jobs: au pair and bartender. Before that I lived in Berlin, learned German there and finished my studies. My German isn’t perfect, but I like talking and I practice every day — living together as a small culture dive included.",
+          about_strip_aria: "About me – photos",
+          img_berlin_alt: "Time in Berlin",
+          cap_ex_berliner: "Ex-Berliner",
+
+          // Hobbies
+          hobbies_aria: "Hobbies & habits",
+          hobbies_title: "Hobbies & healthy habits",
+          hobbies_p1: "Music is my biggest passion: I play electric guitar, tried piano, drums and singing, and I experiment with production software via an audio interface — a few clips even made it to TikTok 😅. I love concerts and festivals (metal & rock, but open to lots) and want to explore Munich’s music scene.",
+          hobbies_p2: "Sport & lifestyle: Training is a steady part of my routine — I do CrossFit and I’d like to try HYROX. I’m a non-smoker. I like beer — usually on weekends, chill with friends.",
+          hobbies_strip_aria: "Hobbies – photos",
+          img_music_alt: "Music production",
+          cap_mit_freunde: "With friends",
+          cap_noch_anf: "still a beginner",
+          cap_konzerten: "Concerts!!",
+          cap_eibsee: "Lake Eibsee :O",
+          cap_spree: "The Spree in Berlin!",
+
+          // Cooking
+          cook_aria: "Cooking",
+          cook_title: "I love cooking",
+          cook_p1: "Good food is part of a good life. When I have time, I cook and try new recipes — preferably for others. As a true Valencian I of course cook Paella Valenciana. If I move in with you, Paella nights are guaranteed 🍚 (and BBQs, dinners, breakfasts… relaxed and with good vibes).",
+          cook_strip_aria: "Cooking – photos",
+          img_paella_alt: "Paella Valenciana",
+          cap_paella1: "Paella Valenciana — a piece of home 🇪🇸",
+          cap_cook_home: "Cooking is fun, especially together 🍳",
+          cap_new_recipe: "Tried a new recipe — success!",
+          cap_cook_home2: "Cooking is fun, especially together 🍳",
+
+          // Roommate
+          roommate_aria: "As a flatmate",
+          roommate_title: "As a flatmate",
+          roommate_p1: "I’ve lived away from home since I was 12 — dorms, flatshares, Berlin and now Munich. I’m tidy (even if my room can be a little chaotic 😅). In shared areas I like order: if you use it, you clean it. A cleaning rota is fair. Most important principle: communication — open, respectful, with humour. If something’s off, we talk.",
+          roommate_strip_aria: "Living together – photos",
+
+          // Contact
+          contact_aria: "Contact",
+          contact_title: "Contact",
+          contact_p1: "Best way to reach me is Instagram, TikTok or email:",
+          contact_group_aria: "Contact options",
+          btn_tiktok: "TikTok",
+          btn_instagram: "Instagram",
+          btn_email: "Email",
+          contact_speed: "I reply faster than flats disappear during Oktoberfest 🍺",
+
+          // Footer
+          footer: "© Hector · Made with heart in Munich"
+        }
+      };
+
+      const els = {
+        title: document.querySelector('title[data-i18n-head="title"]'),
+        metaDesc: document.getElementById('meta-desc'),
+        ogLocale: document.getElementById('og-locale'),
+        ogTitle: document.getElementById('og-title'),
+        ogDesc: document.getElementById('og-desc'),
+        ogImgAlt: document.getElementById('og-image-alt'),
+        twTitle: document.getElementById('tw-title'),
+        twDesc: document.getElementById('tw-desc'),
+        html: document.documentElement,
+        toggle: document.getElementById('langToggle')
+      };
+
+      function applyLang(lang){
+        const dict = t[lang];
+        // Text nodes
+        document.querySelectorAll('[data-i18n]').forEach(node=>{
+          const key = node.getAttribute('data-i18n');
+          if(dict[key]!==undefined){ node.innerHTML = dict[key]; }
+        });
+        // ARIA labels
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(node=>{
+          const key = node.getAttribute('data-i18n-aria-label');
+          if(dict[key]!==undefined){ node.setAttribute('aria-label', dict[key]); }
+        });
+        // ALT attributes
+        document.querySelectorAll('[data-i18n-alt]').forEach(node=>{
+          const key = node.getAttribute('data-i18n-alt');
+          if(dict[key]!==undefined){ node.setAttribute('alt', dict[key]); }
+        });
+
+        // Head/meta
+        if(els.title) els.title.textContent = dict.title;
+        if(els.metaDesc) els.metaDesc.setAttribute('content', dict.meta_desc);
+        if(els.ogLocale) els.ogLocale.setAttribute('content', dict.og_locale);
+        if(els.ogTitle) els.ogTitle.setAttribute('content', dict.og_title);
+        if(els.ogDesc) els.ogDesc.setAttribute('content', dict.og_desc);
+        if(els.ogImgAlt) els.ogImgAlt.setAttribute('content', dict.og_image_alt);
+        if(els.twTitle) els.twTitle.setAttribute('content', dict.tw_title);
+        if(els.twDesc) els.twDesc.setAttribute('content', dict.tw_desc);
+
+        // html lang
+        els.html.setAttribute('lang', lang === 'de' ? 'de' : 'en');
+
+        // Botón muestra el idioma alternativo
+        els.toggle.textContent = (lang === 'de') ? 'EN' : 'DE';
+        els.toggle.setAttribute('aria-label', lang === 'de' ? 'Switch language' : 'Sprache wechseln');
+
+        // Guardar preferencia
+        try{ localStorage.setItem('langPref', lang); }catch(e){}
+      }
+
+      // Inicialización: preferencia guardada o por defecto 'de'
+      const saved = (function(){ try{ return localStorage.getItem('langPref'); }catch(e){ return null; }})();
+      const initial = (saved === 'en' || saved === 'de') ? saved : 'de';
+      applyLang(initial);
+
+      // Toggle handler
+      els.toggle.addEventListener('click', ()=>{
+        const current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'de';
+        const next = current === 'de' ? 'en' : 'de';
+        applyLang(next);
+      });
     })();
   </script>
 </body>
