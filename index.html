@@ -51,6 +51,8 @@
       touch-action: pan-y;  /* hero solo vertical */
       overflow-x:hidden;    /* evita que el hero se mueva lateral */
     }
+ /* Hint arriba */
+    .contactline{ text-align:center; color:#fff; font-size:13px; opacity:.96; letter-spacing:.2px; margin: 0;}
 
     /* Iconos arriba */
     .social-hero{
@@ -67,7 +69,7 @@
     .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; width:100%; touch-action: pan-y; overflow-x:clip; }
     h1{
       margin:0; font-weight:700; color:#fff; letter-spacing:.2px;
-      font-size:clamp(30px, 7.2vw, 46px); line-height:1.06;
+      font-size:clamp(30px, 7.2vw, 46px); margin:1.2px; line-height:1.06;
     }
     .subtitle{font-weight:700; color:#fff; font-size:clamp(18px,4.6vw,24px); margin:0}
     .lead{ color:var(--ink); font-size:clamp(14px,3.9vw,18px); margin:0; max-width:760px; font-weight:600; line-height:1.42 }
@@ -134,7 +136,7 @@
 <body>
 
   <header id="hero">
-    <div class="scrollhint">Schreib mir jetzt:</div>
+    <div class="contactline">Schreib mir jetzt:</div>
     <!-- Iconos arriba -->
     <div class="social-hero" aria-label="Schnellzugriff Socials">
       <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
