@@ -71,7 +71,7 @@
 
     /* Línea "Schreib mir jetzt" */
     .contactline{
-      color:#fff; font-size:15px; opacity:.96; letter-spacing:.2px; margin-bottom:6px;
+      color:#fff; font-size:15px; opacity:.96; letter-spacing:.2px; margin-bottom:4px;
     }
 
     /* Iconos arriba */
@@ -94,6 +94,7 @@
 
     /* Carrusel SOLO del hero */
     .hero-strip{
+      margin-top:8px;
       display:flex; gap:8px;
       overflow-x:auto; overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
@@ -111,8 +112,8 @@
     .hero-strip::-webkit-scrollbar{ height:6px }
     .hero-strip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
 
-.lead {font-size:16px; font-weight:700; line-height: 1.2; margin-bottom:40px;}
-.lead.light {font-size: 14px; line-height:1.3; font-weight:100; margin-bottom:36px;}
+.lead {font-size:16px; font-weight:700; line-height: 1.2; margin-bottom:32px;}
+.lead.light {font-size: 15px; line-height:1.3; font-weight:100; margin-bottom:44px;}
 
     /* Zonas */
     .zones{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
@@ -463,7 +464,7 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           social_aria: "Schnellzugriff Socials",
           subtitle: "",
           hero_strip_aria: "Bilder von Hector",
-          lead_bmw: "Bei BMW gestartet, suche ab jetzt im Okt",
+          lead_bmw: "Bei BMW gestartet, suche ab sofort im Okt",
           lead_hook: "Danke für deine Neugier. Bleib dran, wenn du gerade einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.",
           zones_aria: "Bevorzugte Stadtteile",
           zone_u2: "Nähe BMW",
@@ -530,10 +531,10 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
         },
         en: {
           // Head / metas / alt title
-          title: "Hector – your future flatmate",
-          meta_desc: "I’ve started at BMW and I’m looking for a room or apartment in Munich from October 1.",
+          title: "Looking for a room or apartment!",
+          meta_desc: "Just tarted at BMW and searching from now on.",
           og_locale: "en_GB",
-          og_title: "Hector – your future flatmate",
+          og_title: "Looking for a room or apartment",
           og_desc: "I’ve started at BMW and I’m looking for a room or apartment in Munich from October 1.",
           og_image_alt: "Hector – looking for a room in Munich",
           tw_title: "Hector – your future flatmate",
@@ -542,25 +543,23 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           // Hero
           contactline: "Message me now:",
           social_aria: "Quick access to socials",
-          subtitle: "Your future flatmate",
+          
           hero_strip_aria: "Photos of Hector",
           lead_bmw: "I’ve started at BMW and I’m looking for a room or an apartment in Munich from October 1.",
           lead_hook: "If you’re here, I’ve probably got your attention. Stick around if you’re looking for a new flatmate — or you know someone and want to help.",
           zones_aria: "Preferred areas",
-          zone_u2: "Along U2",
-          time: "Langfristig",
-          zone_schwabing: "Schwabing-West",
-          zone_maxvorstadt: "Maxvorstadt",
-          zone_milbert: "Milbertshofen–Am Hart",
-          zone_neuhausen: "Neuhausen",
-          zone_open: "Open to offers",
+          zone_u2: "BMW zone",
+          time: "Long term",
+          zone_schwabing: "Open for offers",
+          zone_maxvorstadt: "Non-smoker",
+          zone_open: "Along U2",
           scrollhint: "Scroll down ↓",
 
           // About
           about_aria: "About me",
           about_title: "A bit about me",
-          about_p1: "I am 27 years old and I am from Spain. I studied Industrial Engineering in Valencia and at the end of September I will start an internship at BMW in project management. I have already been living in Munich since April. My intention is to stay here and build a good career. That is why I am now looking for a room or an apartment, preferably for the long term. ",
-          about_p2: "I am especially interested in districts around BMW or along the U2 line, such as Milbertshofen, Am Hart, Frankfurter Ring, Schwabing-West or Maxvorstadt. My budget is up to €700 for a room or up to €1,400 for an apartment (1–2 rooms), but I’m flexible if the place is a good fit.",
+          about_p1: "Hey everyone, thanks for reading on. My name’s Hector, I’m 27 years old and I’m from Spain. I’ve been living in Germany since 2022. I first lived in Berlin, a pretty crazy city I’d say, but since April I’ve been based in Munich. My plan is to stay here longer and build my career. I finished my degree in Industrial Engineering back in Valencia, and since the end of September I’ve been working as an intern at BMW. I’m really excited about that because it feels like a solid step forward in my career.",
+          about_p2: "Now I’m looking for a place to call home, a shared flat or an apartment, somewhere I can really settle down and build a life. Ideally for the long term. I’m especially interested in areas close to BMW or along the U2 line. My budget is around 700 €, but I’m open to other options if the place feels right.",
           about_p3: "I already have some experience with Germany. I lived in Berlin for two years, where I did an exchange semester and later worked in gastronomy while improving my German. My German may not be perfect, but communication is not a problem. I also speak good English, and I enjoy the cultural exchange that comes naturally when sharing a flat.",
           about_strip_aria: "About me – photos",
           img_berlin_alt: "Time in Berlin",
@@ -569,9 +568,9 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           // Hobbies
           hobbies_aria: "Hobbies & habits",
           hobbies_title: "About my lifestyle",
-          hobbies_p1: "I would describe myself as a social person. I like to spend time with friends, try out new things, go partying or just have a drink. Since I am still new in the city, I really want to make new connections and discover Munich with others. Things like bars, theaters, the opera, picnics … I want to experience more. I also enjoy nature, and I think Munich and its surroundings have a lot to offer – lakes, mountains, and more. I don’t smoke and I usually drink more on weekends than during the week.",
-          hobbies_p2: "I have many hobbies, but I love music the most. I have been learning guitar for a few years, but I have also tried other instruments. Of course, I like going to concerts and other cultural events. My favorites are metal and rock concerts, but I am open to anything that sounds good live.",
-          hobbies_p3: "I am also a sporty person. I try to exercise almost every day, but my favorite sport in recent years has been CrossFit.",
+          hobbies_p1: "I would describe myself as a social person. I like to spend time with friends, try out new things, go partying or just have a drink. Since I am still new in the city, I really want to make new connections and discover Munich with others. Things like bars, theaters, the opera… I want to experience more. I don’t smoke and I usually drink more on weekends than during the week.",
+          hobbies_p2: "I love Music and love learnign how to play instruments. I’ve been learning guitar for a while now, though I’ve also tried a few others. I enjoy going to techno parties too, but honestly, nothing beats live concerts, especially metal and rock. I love dancing in the moshpit, but I’m open to anything that sounds good live. In general, I like trying new things.",
+          hobbies_p3: "I am also a sporty person. I try to exercise almost every day. I like joining events like marathons or Hyrox, so I’m also one of those people who actually enjoy CrossFit.",
           hobbies_strip_aria: "Hobbies – photos",
           img_music_alt: "Music production",
           cap_konzerten: "Concerts!!",
@@ -579,7 +578,7 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           // Cooking
           cook_aria: "Cooking",
           cook_title: "Cooking",
-          cook_p1: "I really love eating good food. When I have time, I like to cook tasty dishes for myself or for friends, and I also enjoy having nice dinners together. As a real Valencian, of course I like cooking Paella. If I end up joining your flatshare, we could have these dinners and you would get to try an authentic Paella with real Tapas 😉",
+          cook_p1: "I really like the idea of having shared dinners in a flat, or just hanging out with friends over a beer or a glass of wine. Being from Valencia, of course I love cooking paella. I might even win you over with one. If I become part of your flat, you’ll definitely get to taste real paella and proper tapas.",
           cook_strip_aria: "Cooking – photos",
           img_paella_alt: "Paella Valenciana",
           cap_cook_home: "Look at these come on",
