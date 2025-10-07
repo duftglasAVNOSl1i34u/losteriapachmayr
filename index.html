@@ -44,19 +44,22 @@
 
     /* Utilidades de espaciado (solo top) */
     .mt-0 { margin-top:0 !important; }
-    .mt-xs { margin-top:4px !important; }
-    .mt-sm { margin-top:14px !important; }
-    .mt-lg { margin-top:28px !important; }
+    .mt-xs { margin-top:4px !important; }     /* muy poco */
+    .mt-sm { margin-top:14px !important; }    /* pequeño */
+    .mt-lg { margin-top:28px !important; }    /* grande */
 
+    /* HERO como pila vertical simple */
     header#hero{
       min-height:100dvh;
       display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
       padding-top:calc(8px + env(safe-area-inset-top)/3);
       padding-bottom:calc(10px + env(safe-area-inset-bottom)/3);
-      overflow-x:hidden;
+      overflow-x:hidden;  /* evita desplazamiento lateral del hero */
       text-align:center;
-      position:relative;
+      position:relative; /* añadido solo para posicionar el selector de idioma */
     }
+
+    /* Botón selector de idioma */
     .lang-toggle{
       position:absolute; top:10px; right:12px;
       padding:8px 12px; font-weight:700; font-size:13px; line-height:1;
@@ -65,9 +68,13 @@
       -webkit-tap-highlight-color: transparent;
       user-select:none;
     }
+
+    /* Línea "Schreib mir jetzt" */
     .contactline{
       color:#fff; font-size:15px; opacity:.96; letter-spacing:.2px; margin-bottom:4px;
     }
+
+    /* Iconos arriba */
     .social-hero{
       display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:32px;
     }
@@ -77,13 +84,15 @@
     }
     .social-hero svg{ width:18px; height:18px; fill:#fff }
 
-    .hero-mid{ display:flex; align-items:center; justify-content:center; width:100%; overflow-x:clip; }
-    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; width:100%; overflow-x:clip; }
+    /* Contenedor central */
+    .hero-mid{ display:flex; align-items:center; justify-content:center; width:100%; touch-action: pan-y; overflow-x:clip; }
+    .stack{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:0; width:100%; touch-action: pan-y; overflow-x:clip; }
 
-    h1{ margin:0; font-weight:700; color:#fff; letter-spacing:.2px; font-size:clamp(22px,7.2vw,46px); line-height:1.06; margin-bottom:20px; }
-
+    /* Títulos */
+    h1{ margin:0; font-weight:700; color:#fff; letter-spacing:.2px; font-size:clamp(22px, 7.2vw, 46px); line-height:1.06; margin-bottom:4px; }
     .subtitle{font-weight:700; color:#fff; font-size:clamp(20px,4.6vw,24px); margin-bottom:6px}
 
+    /* Carrusel SOLO del hero */
     .hero-strip{
       margin-top:8px;
       display:flex; gap:8px;
@@ -92,7 +101,7 @@
       scroll-snap-type:x proximity;
       max-width:100%;
       overscroll-behavior-x:contain;
-      touch-action: pan-x pan-y;
+      touch-action: pan-x pan-y; /* mantiene gesto horizontal y permite vertical */
       height:var(--stripH);
       align-items:center; justify-content:flex-start;
       scrollbar-width:thin;
@@ -103,33 +112,72 @@
     .hero-strip::-webkit-scrollbar{ height:6px }
     .hero-strip::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:999px }
 
-    .lead {font-size:16px; font-weight:700; line-height: 1.2; margin-bottom:32px;}
-    .lead.light {font-size: 15px; line-height:1.3; font-weight:100; margin-bottom:44px;}
+.lead {font-size:16px; font-weight:700; line-height: 1.2; margin-bottom:32px;}
+.lead.light {font-size: 15px; line-height:1.3; font-weight:100; margin-bottom:44px;}
 
+    /* Zonas */
     .zones{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
     .zone{ background:#1b1b1b; color:#eaeaea; padding:4px 9px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap }
 
+    /* Hint abajo */
     .scrollhint{ margin-top:auto; padding-bottom: clamp(4px, env(safe-area-inset-bottom), 10px); text-align:center;color:#fff; font-size:17px; opacity:.96; letter-spacing:.2px }
 
+    /* Secciones inferiores (sin cambios) */
     section{ padding:28px 0 }
     .card{ background:var(--card); border-radius:var(--radius); padding:20px }
     h2.title{ margin:0 0 8px; font-size:clamp(20px,3.2vw,26px); color:#fff; font-weight:700 }
     p{ margin:8px 0 }
-      </style>
+    .two-col{ display:grid; gap:16px; grid-template-columns:1.1fr .9fr }
+    .two-col > div{ min-width:0 }
+    @media (max-width:860px){ .two-col{ grid-template-columns:1fr } }
+
+    /* Carruseles de secciones (sin tocar interacciones) */
+    .hstrip{
+      display:flex; gap:8px;
+      overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity; max-width:100%; padding-bottom:6px;
+      overscroll-behavior-x:contain; touch-action: pan-x pan-y;
+    }
+    .hstrip .hitem{ flex:0 0 auto; width:clamp(140px, 30vw, 200px); scroll-snap-align:start; margin:0 }
+    .hstrip .hitem img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; display:block }
+    .hstrip .hitem figcaption{ color:#c9c9c9; font-size:11px; margin-top:3px; }
+
+    .video{ position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden }
+    .video iframe, .video video{ width:100%; height:100%; border:0; display:block }
+
+    .contact{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px }
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; background:#fff; color:#000; text-decoration:none; font-weight:700; border:0; }
+    .btn svg{ width:18px; height:18px; display:block }
+
+    footer{ padding:30px 0 48px; color:var(--muted); text-align:center; font-size:14px }
+  </style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V4KKP0P7S1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V4KKP0P7S1');
+</script>
 </head>
 <body>
 
   <header id="hero">
+    <!-- Botón DE/EN -->
     <button class="lang-toggle" id="langToggle" type="button" aria-label="Sprache wechseln">EN</button>
 
+    <!-- 1. Schreib mir jetzt -->
     <div class="contactline" data-i18n="contactline">Schreib mir jetzt:</div>
 
+    <!-- 2. Iconos (pegado a 1: sin margen) -->
     <div class="social-hero mt-0" aria-label="Schnellzugriff Socials" data-i18n-aria-label="social_aria">
       <a href="https://wa.me/4915560752840" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M20 3.9A11.8 11.8 0 0 0 12 0C5.4 0 0 5.3 0 11.9c0 2.1.6 4.1 1.6 5.8L0 24l6.4-1.7c1.7.9 3.6 1.3 5.6 1.3h.1c6.6 0 12-5.3 12-11.9 0-3.2-1.3-6.1-3.7-8.2zM12.1 22c-1.7 0-3.3-.4-4.8-1.2l-.4-.2-3.8 1 1-3.7-.2-.4A9.7 9.7 0 0 1 2.3 12c0-5.4 4.5-9.8 9.9-9.8 2.6 0 5 .9 6.8 2.6a9.5 9.5 0 0 1 3 7c0 5.4-4.5 9.8-9.9 9.8zm5.4-7.3c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-.9 1.1s-.3.2-.6.1c-.3-.1-1.2-.4-2.3-1.4-1-.9-1.4-2-1.6-2.3-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.6-.6-.7-.6h-.6c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s1 2.4 1.2 2.6c.2.2 2 3.1 4.8 4.3.7.3 1.2.5 1.6.7.7.2 1.3.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/>
-        </svg>
-      </a>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 3.9A11.8 11.8 0 0 0 12 0C5.4 0 0 5.3 0 11.9c0 2.1.6 4.1 1.6 5.8L0 24l6.4-1.7c1.7.9 3.6 1.3 5.6 1.3h.1c6.6 0 12-5.3 12-11.9 0-3.2-1.3-6.1-3.7-8.2zM12.1 22c-1.7 0-3.3-.4-4.8-1.2l-.4-.2-3.8 1 1-3.7-.2-.4A9.7 9.7 0 0 1 2.3 12c0-5.4 4.5-9.8 9.9-9.8 2.6 0 5 .9 6.8 2.6a9.5 9.5 0 0 1 3 7c0 5.4-4.5 9.8-9.9 9.8zm5.4-7.3c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-.9 1.1s-.3.2-.6.1c-.3-.1-1.2-.4-2.3-1.4-1-.9-1.4-2-1.6-2.3-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.6-.6-.7-.6h-.6c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s1 2.4 1.2 2.6c.2.2 2 3.1 4.8 4.3.7.3 1.2.5 1.6.7.7.2 1.3.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z"/>
+    </svg>
+  </a>
       <a href="https://instagram.com/hevtkr7" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 15.8 2.8 2.8 0 0 0 12 9.2zm5.6-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
       </a>
@@ -139,54 +187,57 @@
       <a href="mailto:hectorinmuenchen@gmail.com" aria-label="E-Mail">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 2v10h16V7l-8 5L4 7z"/></svg>
       </a>
+        
     </div>
 
+    <!-- Contenido central en pila -->
     <div class="hero-mid">
       <div class="stack wrap">
 
-        <!-- TEXTO SUPERIOR NUEVO -->
+        <!-- 3. Título + subtítulo (con espacio pequeño desde iconos) -->
         <div class="mt-sm">
-          <h1>Alex gibt’s doch nicht,</h1>
+          <h1>Zimmer oder Wohnung gesucht!</h1>
         </div>
 
-        <!-- CARRUSEL DE IMÁGENES -->
-        <div class="hero-strip mt-lg" aria-label="Bilder von Hector" data-i18n-aria-label="hero_strip_aria">
+        <!-- 4. Carrusel (pegado al 3) -->
+        <div class="hero-strip mt-0" aria-label="Bilder von Hector" data-i18n-aria-label="hero_strip_aria">
           <div class="hitem"><img src="images2/ucl.jpeg" alt="Hector 4"></div>
           <div class="hitem"><img src="images2/wg.jpeg" alt="Hector 1"></div>
+          
           <div class="hitem"><img src="images2/selfie-berlin.jpeg" alt="Hector 3"></div>
           <div class="hitem"><img src="images2/guitarra.jpeg" alt="Hector 2"></div>
+          
         </div>
 
-        <!-- TEXTO INFERIOR NUEVO -->
-        <div class="mt-lg">
-          <p class="lead" style="font-size:clamp(18px,6vw,30px); font-weight:600;">
-            ich bin Hector und suche aktuell ein Zimmer oder eine Wohnung.
-          </p>
+        <!-- 5. Texto (muy poco desde carrusel) -->
+        <div class="mt-xs">
+          <p class="lead"><strong data-i18n="lead_bmw">Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München</strong></p>
         </div>
 
-        <!-- TEXTO LIGHT ORIGINAL -->
         <div class="mt-sm">
           <p class="lead light" data-i18n="lead_hook">
             Wenn du hier bist, habe ich deine Aufmerksamkeit gewonnen. Bleib dran, wenn du einen neuen Mitbewohner suchst oder jemanden kennst und solidarisch sein möchtest.
           </p>
         </div>
 
-        <!-- ZONAS (ÓVALOS) -->
+        <!-- 6. Barrios (muy poco desde texto) -->
         <div class="zones mt-xs" aria-label="Bevorzugte Stadtteile" data-i18n-aria-label="zones_aria">
           <span class="zone" data-i18n="zone_u2">Bei der U2</span>
           <span class="zone" data-i18n="zone_open">Angebote offen</span>
           <span class="zone" data-i18n="time">Langfristig</span>
           <span class="zone" data-i18n="zone_schwabing">Schwabing-West</span>
           <span class="zone" data-i18n="zone_maxvorstadt">Maxvorstadt</span>
+         
         </div>
 
       </div>
     </div>
 
+    <!-- 7. Hint (espacio grande desde barrios) -->
     <div class="scrollhint" data-i18n="scrollhint">Nach unten scrollen ↓</div>
   </header>
-  
-    <main class="wrap">
+
+  <main class="wrap">
 
     <section aria-label="Über mich" data-i18n-aria-label="about_aria">
       <div class="card two-col">
@@ -237,9 +288,11 @@
           <div class="hstrip" aria-label="Hobbys – Bilder" data-i18n-aria-label="hobbies_strip_aria">
             <figure class="hitem">
               <img src="images2/selfie-fernan-carles.jpeg" alt="Musikproduktion" data-i18n-alt="img_music_alt">
+            
             </figure>
             <figure class="hitem">
               <img src="images2/bateria.jpeg" alt="E-Gitarre">
+            
             </figure>
             <figure class="hitem">
               <img src="images2/polyphia.jpeg" alt="E-Gitarre">
@@ -247,9 +300,11 @@
             </figure>
             <figure class="hitem">
               <img src="images2/eibsee.jpeg" alt="Konzert">
+              
             </figure>
             <figure class="hitem">
               <img src="images2/rio-berlin.jpeg" alt="Konzert">
+              
             </figure>
           </div>
         </div>
@@ -263,6 +318,7 @@
           <p data-i18n="cook_p1">
             Ich liebe es, gut zu essen. Wenn ich Zeit habe, koche ich leckere Gerichte für mich oder für Freunde, und ich genieße auch gemeinsame Abendessen.
 Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG werde, können wir solche Abende machen – und ihr werdet eine echte Paella und richtige Tapas probieren 😉
+
           </p>
         </div>
         <div>
@@ -283,6 +339,7 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
               <img src="images2/paella-bbq.jpeg" alt="Gericht">
               <figcaption data-i18n="cap_new_recipe"></figcaption>
             </figure>
+           
           </div>
         </div>
       </div>
@@ -315,17 +372,29 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
       </div>
     </section>
 
+    <!-- VIDEO (comentado)
+    <section aria-label="Video">
+      <div class="card">
+        <h2 class="title" data-i18n="video_title">Kurzes Video</h2>
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Vorstellungsvideo"></iframe>
+        </div>
+        <p class="lead" data-i18n="video_lead">20–30 Sekunden, aufgenommen in München – damit man mich direkt sprechen sieht.</p>
+      </div>
+    </section>
+    -->
+
     <section aria-label="Kontakt" data-i18n-aria-label="contact_aria">
       <div class="card" style="text-align:center">
         <h2 class="title" data-i18n="contact_title">Kontakt</h2>
         <p data-i18n="contact_p1">Schreib mir am besten über Instagram, TikTok oder per E-Mail:</p>
         <div class="contact" role="group" aria-label="Kontaktoptionen" data-i18n-aria-label="contact_group_aria">
-          <a class="btn" href="https://wa.me/4915560752840" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18" fill="currentColor">
-              <path d="M380.9 97.1C339 55.1 283.2 32 224.5 32 100.8 32 0 132.3 0 256c0 45 11.8 88.7 34.3 127.1L0 480l101.1-33.5c35.5 19.4 75.5 29.5 116.8 29.5h.1c123.6 0 224.5-100.3 224.5-224C442.5 228.9 422.7 150.6 380.9 97.1zM224.5 438.7c-36.1 0-71.6-9.7-102.5-28.1l-.7-4.3-60 19.9 19.7-58.4-4.8-7.5C49 331.7 37.8 294.7 37.8 256c0-102.7 84-186.2 186.7-186.2 49.8 0 96.6 19.4 131.8 54.6s54.6 82.1 54.6 131.6c0 102.7-84 186.7-186.4 186.7z"/>
-            </svg>
-            <span data-i18n="btn_whatsapp">WhatsApp</span>
-          </a>
+                <a class="btn" href="https://wa.me/4915560752840" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18" fill="currentColor">
+  <path d="M380.9 97.1C339 55.1 283.2 32 224.5 32 100.8 32 0 132.3 0 256c0 45 11.8 88.7 34.3 127.1L0 480l101.1-33.5c35.5 19.4 75.5 29.5 116.8 29.5h.1c123.6 0 224.5-100.3 224.5-224C442.5 228.9 422.7 150.6 380.9 97.1zM224.5 438.7c-36.1 0-71.6-9.7-102.5-28.1l-7.3-4.3-60 19.9 19.7-58.4-4.8-7.5C49 331.7 37.8 294.7 37.8 256c0-102.7 84-186.2 186.7-186.2 49.8 0 96.6 19.4 131.8 54.6s54.6 82.1 54.6 131.6c0 102.7-84 186.7-186.4 186.7zm101.7-138.6c-5.6-2.8-33.1-16.3-38.2-18.1-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.4 18.1-17.6 21.8-3.2 3.7-6.5 4.2-12.1 1.4-33.1-16.5-54.8-29.4-76.6-66.5-5.8-10 5.8-9.3 16.5-30.8 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.4-4.5-10.9-9.1-9.4-12.5-9.6-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.2 59.8 95.1 83.8 13.3 5.8 23.6 9.3 31.6 11.9 13.3 4.2 25.5 3.6 35.1 2.2 10.7-1.6 33.1-13.5 37.8-26.5 4.7-13.1 4.7-24.3 3.2-26.7-1.3-2.5-5-3.9-10.6-6.7z"/>
+</svg>
+        <span data-i18n="btn_whatsapp">WhatsApp</span>
+      </a>
           <a class="btn" href="https://www.tiktok.com/@hectorinmuenchen" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2h3a5.5 5.5 0 0 0 5 5v3a8.5 8.5 0 0 1-5-2v8.2A5.8 5.8 0 1 1 11.2 10H14a3.6 3.6 0 1 0 0 7.2V2z"/></svg>
             <span data-i18n="btn_tiktok">TikTok</span>
@@ -342,36 +411,26 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
         <p style="color:#c9c9c9; margin-top:10px" data-i18n="contact_speed">Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺</p>
       </div>
     </section>
-
-    <!-- Vista previa (Open Graph) -->
-    <section aria-label="Vorschau" class="wrap" style="padding-top:0">
-      <div class="card" style="text-align:center">
-        <figure class="og-preview" style="margin:0">
-          <img
-            src="images2/logo4.jpeg"
-            alt="WG gesucht München – Vorschaukarte"
-            loading="lazy"
-            width="1200" height="630"
-            style="max-width:100%; height:auto; border-radius:12px; display:block; margin-inline:auto;"
-          >
-        </figure>
-      </div>
-    </section>
+<!-- Vista previa (la misma que se usa en Open Graph) -->
+<section aria-label="Vorschau" class="wrap" style="padding-top:0">
+  <div class="card" style="text-align:center">
+    <figure class="og-preview" style="margin:0">
+      <img
+        src="images2/logo4.jpeg"
+        alt="WG gesucht München – Vorschaukarte"
+        loading="lazy"
+        width="1200" height="630"
+        style="max-width:100%; height:auto; border-radius:12px; display:block; margin-inline:auto;"
+      >
+    </figure>
+  </div>
+</section>
   </main>
 
   <footer class="wrap" data-i18n="footer">© Hector · Mit Herz in München erstellt</footer>
-    
-      <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4KKP0P7S1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V4KKP0P7S1');
-  </script>
 
   <script>
-    // Bloqueo de gestos horizontales fuera del carrusel en el HERO
+    // JS defensivo: bloquea gestos horizontales en el HERO excepto dentro de .hero-strip
     (function(){
       const hero = document.getElementById('hero');
       const strip = hero.querySelector('.hero-strip');
@@ -386,17 +445,20 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
         const dx = Math.abs(t.clientX - startX);
         const dy = Math.abs(t.clientY - startY);
         const insideStrip = e.target.closest && e.target.closest('.hero-strip');
-        if(dx > dy && !insideStrip){ e.preventDefault(); }
+        // Si el gesto es más horizontal que vertical y NO estamos sobre la tira, bloqueamos
+        if(dx > dy && !insideStrip){
+          e.preventDefault();
+        }
       }, {passive:false});
       hero.addEventListener('touchend', ()=>{ active=false; }, {passive:true});
       hero.addEventListener('touchcancel', ()=>{ active=false; }, {passive:true});
     })();
 
-    // --- Multilenguaje (DE/EN) con los textos nuevos del hero ---
+    // --- Multilenguaje mínimo, sin romper layout ---
     (function(){
       const t = {
         de: {
-          // Head / metas
+          // Head / metas / alt title
           title: "Zimmer oder Wohnung gesucht!",
           meta_desc: "Bei BMW gestartet, suche ab 1. Oktober ein WG-Zimmer oder eine Wohnung in München",
           og_locale: "de_DE",
@@ -409,9 +471,9 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           // Hero
           contactline: "Schreib mir jetzt:",
           social_aria: "Schnellzugriff Socials",
+          subtitle: "",
           hero_strip_aria: "Bilder von Hector",
-          hero_top: "Alex gibt’s doch nicht,",
-          hero_bottom: "ich bin Hector und suche aktuell ein Zimmer oder eine Wohnung.",
+          lead_bmw: "Bei BMW gestartet, suche ab sofort im Okt",
           lead_hook: "Danke für deine Neugier. Bleib dran, wenn du gerade einen neuen Mitbewohner suchst – oder jemanden kennst und solidarisch sein möchtest.",
           zones_aria: "Bevorzugte Stadtteile",
           zone_u2: "Nähe BMW",
@@ -421,7 +483,7 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           zone_open: "Entlang der U2",
           scrollhint: "Nach unten scrollen ↓",
 
-          // Secciones (sin cambios)
+          // About
           about_aria: "Über mich",
           about_title: "Ein bisschen über mich",
           about_p1: "Hallo Leute, Danke, dass du weiter liest. Ich heisse Hector, bin 27 Jahre alt und komme aus Spanien. Ich wohne schon in Deutschland seit 2022. Ich war erst in Berlin, eine sehr verrückte Stadt, würde ich sagen aber seit April wohne ich in München und meine Absicht ist also, hier länger zu bleiben und meine Karriere aufzubauen. Ich habe mein Studium in Wirtschaftsingenieurwesen in Valencia abeschlossen und seit Ende September bin ich als Praktikant bei BMW tätig. Darauf freue ich mich sehr, da ich einen guten Schritt in meiner Karriere erreicht habe.",
@@ -430,26 +492,40 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           about_strip_aria: "Über mich – Bilder",
           img_berlin_alt: "Zeit in Berlin",
           cap_ex_berliner: "Ex Berliner",
+
+          // Hobbies
           hobbies_aria: "Hobbys & Gewohnheiten",
           hobbies_title: "Mein Lebensstil",
-          hobbies_p1: "Ich würde mich als eine soziale Person beschreiben. Ich verbringe gerne Zeit mit Freunden, probiere neue Dinge aus, gehe feiern oder einfach etwas trinken. Da ich noch nicht lange in München bin, möchte ich neue Kontakte knüpfen und die Stadt mit anderen entdecken. Bars, Theater, die Oper, Picknicks … ich will vieles davon erleben. Ich mag auch die Natur – die Seen und Berge rund um München finde ich wunderschön. Ich rauche nicht und trinke meistens eher am Wochenende als unter der Woche.",
-          hobbies_p2: "Ich habe viele Hobbys, aber Musik liebe ich am meisten. Seit ein paar Jahren lerne ich Gitarre, habe aber auch andere Instrumente ausprobiert. Ich gehe gern auf Konzerte und kulturelle Veranstaltungen. Am liebsten höre ich Metal und Rock, aber ich bin offen für alles, was live gut klingt.",
-          hobbies_p3: "Ich bin auch eine sportliche Person und versuche fast jeden Tag Sport zu machen. In den letzten Jahren ist CrossFit mein Lieblingssport geworden.",
+          hobbies_p1: "Ich würde mich als eine soziale Person beschreiben. Ich verbringe gerne Zeit mit Freunden, probiere neue Dinge aus, gehe feiern oder einfach etwas trinken. Da ich noch nicht lange in München bin, möchte ich neue Kontakte knüpfen und die Stadt mit anderen entdecken. Bars, Theater, vielleicht die Oper… ich will vieles davon erleben. Und wie viele Leute hier, finde ich auch die Natur rund um München wunderschön. Matcha ist gut aber overpriced wtf Ich rauche nicht und trinke meistens eher am Wochenende als unter der Woche.",
+          hobbies_p2: "Ich liebe sehr Musik, liebe also Instrumente spielen. Seite einigen Jahren lerne ich Gitarre aber habe auch andere Instrumente ausprobiert. Zu Techno gehe ich auch gerne feiern, aber es gibt nichts wie Konzerten, am liebsten Metal und Rock. Ich liebe es, im Moshpit zu tanzen. Aber ich bin auch offen für alles, was live gut klingt. Ich probiere gerne generel neue Dinge aus.",
+          hobbies_p3: "Ich bin auch sportlich, und nehme also gerne teil, an Dinge wie Marathonen und Hyrox. Ich bin auch ein von denen, die Crossfit mögen.",
           hobbies_strip_aria: "Hobbys – Bilder",
           img_music_alt: "Musikproduktion",
+        
+          
           cap_konzerten: "Konzerten!!",
+          
+          
+
+          // Cooking
           cook_aria: "Kochen",
           cook_title: "Kochen",
           cook_p1: "Ich liebe es, gut zu essen Leute. Wenn ich Zeit habe, probiere ich neue Rezepte aus oder koche ich sehr leckere Rezepte. Also gefällt mir sehr die Idee, im WG gemainsame Abendessens zu unternehmen, oder mit ein paar Freunden ein Bierchen oder Wein zu trinken. Als Valencianer koche ich natürlich gerne Paella. Ich kann euch damit verführen. Wenn ich Teil eurer WG werde, werdet ihr wissen, was eine gute Paella oder echte Tapas sind.",
           cook_strip_aria: "Kochen – Bilder",
           img_paella_alt: "Paella Valenciana",
+          
           cap_cook_home: "Schaut mal",
+          
           cap_cook_home2: "Come on Leute",
+
+          // Roommate
           roommate_aria: "Als Mitbewohner",
           roommate_title: "Zusammenleben",
           roommate_p1: "Ich glaube, eine WG sollte auch ein soziales Zuhause sein: Jeder hat sein eigenes Zimmer, aber man teilt auch Momente zusammen. Ich freue mich darauf, meine Mitbewohner und vielleicht auch ihre Freunde kennenzulernen.",
           roommate_p2: "Seit ich 19 bin, wohne ich nicht mehr zu Hause – Wohnheime, WGs, Berlin und jetzt München. Ich bin sauber und verantwortungsbewusst, auch wenn mein Zimmer manchmal ein kleines Chaos sein kann. In den Gemeinschaftsbereichen: was man benutzt, macht man natürlich sauber. Ein Putzplan ist fair. Aber ich kann mich auch gut anpassen. Ich glaube, Kommunikation ist auch wichtig.",
           roommate_strip_aria: "Zusammenleben – Bilder",
+
+          // Contact
           contact_aria: "Kontakt",
           contact_title: "Kontakt",
           contact_p1: "Schreib mir am besten über Whatsapp, Instagram, TikTok oder per E-Mail:",
@@ -458,10 +534,12 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           btn_instagram: "Instagram",
           btn_email: "E-Mail",
           contact_speed: "Ich antworte schneller, als Wohnungen zur Wiesn verschwinden 🍺",
+
+          // Footer
           footer: "© Hector · Mit Herz in München erstellt"
         },
         en: {
-          // Head / metas
+          // Head / metas / alt title
           title: "Looking for a room or apartment!",
           meta_desc: "Just tarted at BMW and searching from now on.",
           og_locale: "en_GB",
@@ -474,9 +552,9 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           // Hero
           contactline: "Message me now:",
           social_aria: "Quick access to socials",
+          
           hero_strip_aria: "Photos of Hector",
-          hero_top: "Alex doesn’t exist,",
-          hero_bottom: "I’m Hector and I’m currently looking for a room or an apartment.",
+          lead_bmw: "I’ve started at BMW and I’m looking for a room or an apartment in Munich from October 1.",
           lead_hook: "If you’re here, I’ve probably got your attention. Stick around if you’re looking for a new flatmate — or you know someone and want to help.",
           zones_aria: "Preferred areas",
           zone_u2: "BMW zone",
@@ -486,7 +564,7 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           zone_open: "Along U2",
           scrollhint: "Scroll down ↓",
 
-          // Sections (unchanged)
+          // About
           about_aria: "About me",
           about_title: "A bit about me",
           about_p1: "Hey everyone, thanks for reading on. My name’s Hector, I’m 27 years old and I’m from Spain. I’ve been living in Germany since 2022. I first lived in Berlin, a pretty crazy city I’d say, but since April I’ve been based in Munich. My plan is to stay here longer and build my career. I finished my degree in Industrial Engineering back in Valencia, and since the end of September I’ve been working as an intern at BMW. I’m really excited about that because it feels like a solid step forward in my career.",
@@ -495,6 +573,8 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           about_strip_aria: "About me – photos",
           img_berlin_alt: "Time in Berlin",
           cap_ex_berliner: "Ex-Berliner",
+
+          // Hobbies
           hobbies_aria: "Hobbies & habits",
           hobbies_title: "About my lifestyle",
           hobbies_p1: "I would describe myself as a social person. I like to spend time with friends, try out new things, go partying or just have a drink. Since I am still new in the city, I really want to make new connections and discover Munich with others. Things like bars, theaters, the opera… I want to experience more. I don’t smoke and I usually drink more on weekends than during the week.",
@@ -503,6 +583,8 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           hobbies_strip_aria: "Hobbies – photos",
           img_music_alt: "Music production",
           cap_konzerten: "Concerts!!",
+
+          // Cooking
           cook_aria: "Cooking",
           cook_title: "Cooking",
           cook_p1: "I really like the idea of having shared dinners in a flat, or just hanging out with friends over a beer or a glass of wine. Being from Valencia, of course I love cooking paella. I might even win you over with one. If I become part of your flat, you’ll definitely get to taste real paella and proper tapas.",
@@ -510,11 +592,15 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           img_paella_alt: "Paella Valenciana",
           cap_cook_home: "Look at these come on",
           cap_cook_home2: "Come on people",
+
+          // Roommate
           roommate_aria: "As a flatmate",
           roommate_title: "Co-Living",
           roommate_p1: "I believe that a flatshare should also feel social, but at the same time everyone has their own space and privacy, which is respected. I really look forward to getting to know my flatmates and maybe also their friends.",
           roommate_p2: "Since I was 19, I haven’t lived at home anymore – I have lived in dorms, flatshares, in Berlin and now Munich. I am a clean and responsible person, even if my room can sometimes be a bit chaotic. In common areas, what you use, you clean of course. A cleaning plan is fair. But I can really adapt. I believe it’s also important good communication.",
           roommate_strip_aria: "Living together – photos",
+
+          // Contact
           contact_aria: "Contact",
           contact_title: "Contact",
           contact_p1: "Best way to reach me is Whatsapp, Instagram, TikTok or email:",
@@ -523,6 +609,8 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
           btn_instagram: "Instagram",
           btn_email: "Email",
           contact_speed: "I reply fast ;)",
+
+          // Footer
           footer: "© Hector · Made with heart in Munich"
         }
       };
@@ -542,19 +630,23 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
 
       function applyLang(lang){
         const dict = t[lang];
+        // Text nodes
         document.querySelectorAll('[data-i18n]').forEach(node=>{
           const key = node.getAttribute('data-i18n');
           if(dict[key]!==undefined){ node.innerHTML = dict[key]; }
         });
+        // ARIA labels
         document.querySelectorAll('[data-i18n-aria-label]').forEach(node=>{
           const key = node.getAttribute('data-i18n-aria-label');
           if(dict[key]!==undefined){ node.setAttribute('aria-label', dict[key]); }
         });
+        // ALT attributes
         document.querySelectorAll('[data-i18n-alt]').forEach(node=>{
           const key = node.getAttribute('data-i18n-alt');
           if(dict[key]!==undefined){ node.setAttribute('alt', dict[key]); }
         });
 
+        // Head/meta
         if(els.title) els.title.textContent = dict.title;
         if(els.metaDesc) els.metaDesc.setAttribute('content', dict.meta_desc);
         if(els.ogLocale) els.ogLocale.setAttribute('content', dict.og_locale);
@@ -564,17 +656,23 @@ Als echter Valencianer koche ich natürlich gerne Paella. Wenn ich Teil eurer WG
         if(els.twTitle) els.twTitle.setAttribute('content', dict.tw_title);
         if(els.twDesc) els.twDesc.setAttribute('content', dict.tw_desc);
 
+        // html lang
         els.html.setAttribute('lang', lang === 'de' ? 'de' : 'en');
+
+        // Botón muestra el idioma alternativo
         els.toggle.textContent = (lang === 'de') ? 'EN' : 'DE';
         els.toggle.setAttribute('aria-label', lang === 'de' ? 'Switch language' : 'Sprache wechseln');
 
+        // Guardar preferencia
         try{ localStorage.setItem('langPref', lang); }catch(e){}
       }
 
+      // Inicialización: preferencia guardada o por defecto 'de'
       const saved = (function(){ try{ return localStorage.getItem('langPref'); }catch(e){ return null; }})();
       const initial = (saved === 'en' || saved === 'de') ? saved : 'de';
       applyLang(initial);
 
+      // Toggle handler
       els.toggle.addEventListener('click', ()=>{
         const current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'de';
         const next = current === 'de' ? 'en' : 'de';
